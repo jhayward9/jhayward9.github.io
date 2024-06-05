@@ -1,0 +1,51 @@
+html, html body {
+    background-color: black;
+}
+
+nav a.navbar-brand:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+nav a.navbar-brand, main h1 {
+    font-size: 200%;
+    color: white;
+    font-weight: bold;
+}
+
+main h1 {
+    font-size: 400%;
+} 
+
+footer h3, 
+#navbarNav > ul > li:nth-child(1) > a {
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+body > header > nav > div > button > span {
+    color: white;
+}
+
+#socialMedia h5 {
+    display: inline;
+    padding: 0 1.25em;
+    margin-top: .25em;
+}
+
+#socialMedia h5:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+#socialMedia h5 a {
+    text-decoration: none;
+    color: white;
+    font-size: 100%;
+}
+
+#socialMedia h5 i {
+    color: #3b5998;
+}
+
