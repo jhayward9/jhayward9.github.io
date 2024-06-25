@@ -49,3 +49,21 @@ body > header > nav > div > button > span {
     color: #3b5998;
 }
 
+/* START NAVIGATION */
+
+#navbar_brand_JH:hover {
+    text-decoration: none;
+    color: #5CC629;
+}
+
+body > header > div.row > div > div > a {
+    color: #fff;
+    text-decoration: none;
+}
+
+body > header > div.row > div > div > a:hover {
+    color: #5CC629;
+}
+
+/* END NAVIGATION */
+
