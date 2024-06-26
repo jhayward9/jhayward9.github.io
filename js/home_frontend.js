@@ -21,3 +21,24 @@ $(document).ready(function() {
     $('#' + divToShow).show();
   });
 });
+
+
+//replaces list element when clicked 
+$(document).ready(function() {
+  $('li').click(function() {
+    // Overwrite the current navbar
+    $('.navbar').replaceWith(`
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <div class="row w-100">
+            <div class="col-4"></div> <!-- First column blank -->
+            <div class="col-4 d-flex justify-content-center align-items-center">
+              <p>Hello World</p> <!-- Second column with 'Hello World' -->
+            </div>
+            <div class="col-4"></div> <!-- Third column blank -->
+          </div>
+        </div>
+      </nav>
+    `);
+  });
+});

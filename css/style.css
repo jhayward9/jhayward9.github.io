@@ -65,7 +65,7 @@ body > header > div.row > div > div > a:hover {
     color: #5CC629;
 }
 
-body > header > div.row > ul {
+body > header > nav > div > div.row > ul {
     display: inline-flex !important;
 }
 
