@@ -56,13 +56,17 @@ body > header > nav > div > button > span {
     color: #5CC629;
 }
 
-body > header > div.row > div > div > a {
+body > header > div.row > ul > li > a {
     color: #fff;
     text-decoration: none;
 }
 
 body > header > div.row > div > div > a:hover {
     color: #5CC629;
+}
+
+body > header > div.row > ul {
+    display: inline-flex !important;
 }
 
 /* END NAVIGATION */
