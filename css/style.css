@@ -7,7 +7,7 @@ nav a.navbar-brand:hover {
     color: blue;
 }
 
-nav a.navbar-brand, main h1 {
+#navbar_brand_JH {
     font-size: 200%;
     color: white;
     font-weight: bold;
@@ -56,12 +56,12 @@ body > header > nav > div > button > span {
     color: #5CC629;
 }
 
-body > header > div.row > ul > li > a {
+body > header > nav > div.container-fluid > ul > li > div > a {
     color: #fff;
     text-decoration: none;
 }
 
-body > header > div.row > div > div > a:hover {
+body > header > nav > div.container-fluid > ul > li > div > a:hover {
     color: #5CC629;
 }
 
