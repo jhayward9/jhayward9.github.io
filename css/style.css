@@ -56,13 +56,14 @@ body > header > nav > div > button > span {
     color: #5CC629;
 }
 
-body > header > nav > div.container-fluid > ul > li > div > a {
+body > main > ul > li > div > a {
     color: #fff;
+    text-shadow: 2px 2px 2px #5CC629;
     text-decoration: none;
 }
 
-body > header > nav > div.container-fluid > ul > li > div > a:hover {
-    color: #5CC629;
+body > main > ul > li > div > a:hover {
+    color: blue;
 }
 
 body > header > nav > div > div.row > ul {
@@ -93,6 +94,10 @@ body > main > ul > li {
 
     body > header > nav > div.container-fluid {
         justify-content: center !important;
+    }
+
+    #socialMedia > div.col-md-8.mx-auto.text-center.mt-4 > h5:nth-child(3) > i {
+        margin-top: 1em !important;
     }
 
 }
