@@ -71,3 +71,9 @@ body > header > nav > div > div.row > ul {
 
 /* END NAVIGATION */
 
+body > main > div.text-center > img {
+    border: 3px solid #fff;
+    border-radius: 100%;
+    width: 15em;
+}
+
