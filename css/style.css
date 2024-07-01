@@ -34,9 +34,8 @@ body > header > nav > div > button > span {
     margin-top: .25em;
 }
 
-#socialMedia h5:hover {
+#socialMedia h5 a:hover {
     text-decoration: underline;
-    color: white;
 }
 
 #socialMedia h5 a {
