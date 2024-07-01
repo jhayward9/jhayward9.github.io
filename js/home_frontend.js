@@ -7,7 +7,7 @@ $(document).ready(function() {
   
 //shows a div when a list element is clicked
 $(document).ready(function() {
-  $('li').click(function() {
+  $('#div1, #div3').click(function() {
     $('.content-div').hide();
     var divToShow = $(this).data('target');
     $('#' + divToShow).show();
