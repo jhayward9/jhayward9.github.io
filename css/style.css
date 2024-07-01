@@ -77,3 +77,30 @@ body > main > div.text-center > img {
     width: 15em;
 }
 
+body > main > ul > li {
+    width: 10em !important;
+}
+
+@media only screen and (max-width: 400px) {
+
+    main.container-fluid.mt-5 {
+        margin-top: -2em !important;
+    }
+
+    body > main > ul > li:nth-child(3) {
+        margin-top: 1em !important;
+    }
+
+    body > header > nav > div.container-fluid {
+        justify-content: center !important;
+    }
+
+}
+
+@media only screen and (min-width: 400px) {
+
+    body > main > ul {
+        justify-content: center !important;
+    }
+
+}
