@@ -3,14 +3,14 @@ import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.g
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID",
-};
+    apiKey: "AIzaSyBfXfAsFSzom-_2kIcb-NmC4_uYPb91fTk",
+    authDomain: "jhayward9githubio.firebaseapp.com",
+    projectId: "jhayward9githubio",
+    storageBucket: "jhayward9githubio.firebasestorage.app",
+    messagingSenderId: "132008042281",
+    appId: "1:132008042281:web:28ff5718df36e286d8a138",
+    measurementId: "G-Q7B6FWMPE0"
+  };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
