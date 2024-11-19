@@ -52,4 +52,25 @@ document.getElementById("postForm").addEventListener("submit", async (event) => 
   } catch (error) {
     console.error("Error adding post:", error);
   }
-});
+}); 
+
+posts.forEach(post => {
+    const postElement = document.createElement("article");
+    postElement.className = "blogpost";
+    postElement.innerHTML = `
+      <h2>${post.title}</h2>
+      <p>${post.content}</p>
+      <p class="author">Posted by: ${post.author}</p>
+      <p class="timedatestamp">${post.timestamp.toDate().toLocaleString()}</p>
+      <div class="comment-section">
+        <form class="comment-form" data-post-id="${post.id}">
+          <textarea placeholder="Write a comment..." required></textarea>
+          <button type="submit">Post Comment</button>
+        </form>
+        <div class="comment-feed" id="comments-${post.id}">
+          <!-- Comments will be dynamically added here -->
+        </div>
+      </div>
+    `;
+    blogArea.appendChild(postElement);
+  });
