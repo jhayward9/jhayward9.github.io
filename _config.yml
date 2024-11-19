@@ -1,0 +1,11 @@
+title: Jesse Hayward's Website
+email: your-email@example.com
+description: >
+  Welcome to Jesse Hayward's site. This is the homepage, with a blog under /blog.
+baseurl: "" # Leave this blank to use the root path for the homepage
+url: "http://127.0.0.1:4000" # or your live site URL
+theme: minima
+twitter_username: ""
+github_username: ""
+plugins:
+  - jekyll-feed
