@@ -1,60 +1,15 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBfXfAsFSzom-_2kIcb-NmC4_uYPb91fTk",
-    authDomain: "jhayward9githubio.firebaseapp.com",
-    projectId: "jhayward9githubio",
-    storageBucket: "jhayward9githubio.firebasestorage.app",
-    messagingSenderId: "132008042281",
-    appId: "1:132008042281:web:28ff5718df36e286d8a138",
-    measurementId: "G-Q7B6FWMPE0"
-  };
+// Function to load blog posts from Firestore
+async function loadPosts() {
+  const postsCollection = collection(db, "posts");
+  const postsSnapshot = await getDocs(postsCollection);
+  const posts = postsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore();
-const auth = getAuth();
+  const blogArea = document.getElementById("blogarea");
+  blogArea.innerHTML = ""; // Clear existing posts
 
-// Admin Login with Google
-async function loginWithGoogle() {
-  const provider = new GoogleAuthProvider();
-  const result = await signInWithPopup(auth, provider);
-  const user = result.user;
-  if (user.email !== "jesseianhayward@gmail.com") {
-    alert("You are not authorized to post!");
-    throw new Error("Unauthorized user");
-  }
-  return user;
-}
-
-// Add a new blog post
-async function addPost(title, content) {
-  await loginWithGoogle();
-  await addDoc(collection(db, "posts"), {
-    title,
-    content,
-    author: "Admin",
-    timestamp: serverTimestamp(),
-  });
-  alert("Post added successfully!");
-}
-
-// Handle form submission for new posts
-document.getElementById("postForm").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const title = document.getElementById("title").value;
-  const content = document.getElementById("content").value;
-
-  try {
-    await addPost(title, content);
-    document.getElementById("postForm").reset();
-  } catch (error) {
-    console.error("Error adding post:", error);
-  }
-}); 
-
-posts.forEach(post => {
+  posts.forEach(post => {
     const postElement = document.createElement("article");
     postElement.className = "blogpost";
     postElement.innerHTML = `
@@ -73,4 +28,55 @@ posts.forEach(post => {
       </div>
     `;
     blogArea.appendChild(postElement);
+
+    // Load comments for the post
+    loadComments(post.id);
   });
+
+  attachCommentFormHandlers(); // Attach event handlers to comment forms
+}
+
+// Function to handle comment submission
+function attachCommentFormHandlers() {
+  document.querySelectorAll(".comment-form").forEach(form => {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const postId = form.getAttribute("data-post-id");
+      const commentContent = form.querySelector("textarea").value;
+
+      const user = auth.currentUser;
+      if (!user) {
+        alert("You must log in with Facebook to comment.");
+        return;
+      }
+
+      await addDoc(collection(db, "comments"), {
+        postId,
+        content: commentContent,
+        author: user.displayName,
+        timestamp: serverTimestamp(),
+      });
+
+      alert("Comment added successfully!");
+      form.reset();
+      loadComments(postId); // Refresh comments
+    });
+  });
+}
+
+// Function to load comments for a post
+async function loadComments(postId) {
+  const commentsCollection = collection(db, "comments");
+  const commentsSnapshot = await getDocs(commentsCollection);
+  const comments = commentsSnapshot.docs
+    .map(doc => doc.data())
+    .filter(comment => comment.postId === postId);
+
+  const commentsDiv = document.getElementById(`comments-${postId}`);
+  commentsDiv.innerHTML = comments
+    .map(comment => `<p>${comment.author}: ${comment.content}</p>`)
+    .join("");
+}
+
+// Load posts on page load
+loadPosts();
