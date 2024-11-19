@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Admin</title>
+  <title>Blog Admin Panel</title>
+  <script type="module" src="/assets/blog_admin.js"></script>
 </head>
 <body>
   <h1>Blog Admin Panel</h1>
+  <button id="logout-btn">Logout</button>
   <form id="postForm">
     <label for="title">Title:</label>
     <input type="text" id="title" required>
@@ -14,6 +16,17 @@
     <textarea id="content" required></textarea>
     <button type="submit">Post</button>
   </form>
-  <script type="module" src="{{ site.baseurl }}/assets/blog_admin.js"></script>
 </body>
+<script>
+  // Access control: redirect to sign-in page if not authenticated
+  if (!sessionStorage.getItem("adminSignedIn")) {
+    window.location.href = "/blog_admin_signin.html";
+  }
+
+  // Logout button functionality
+  document.getElementById("logout-btn").addEventListener("click", () => {
+    sessionStorage.removeItem("adminSignedIn"); // Clear session
+    window.location.href = "/blog_admin_signin.html"; // Redirect to sign-in
+  });
+</script>
 </html>
