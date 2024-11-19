@@ -21,17 +21,16 @@ layout: default
     {{ content }}
   </div>
 
-  <div id="comment-section">
-    <h3>Comments</h3>
-    <div id="comments-list">
-      <!-- Comments dynamically loaded via JavaScript -->
-    </div>
-    <form id="comment-form">
-      <textarea placeholder="Write a comment..." required></textarea>
-      <button type="submit">Post Comment</button>
-    </form>
+  <!-- Comment section -->
+  <div class="commentfeed">
+    <!-- Dynamically added comments -->
   </div>
+  <form class="comment-form" data-post-id="{{ page.url }}">
+    <textarea placeholder="Write a comment..." required></textarea>
+    <button type="submit">Post Comment</button>
+  </form>
 
+  <!-- Reaction buttons -->
   <div class="btn-bar">
     <button class="reactbtns" onclick="likePost()">Like</button>
     <button class="reactbtns" onclick="dislikePost()">Dislike</button>
