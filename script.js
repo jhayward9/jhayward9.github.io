@@ -8,44 +8,6 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  /* --- Active navigation link -------------------------------------------- */
-
-  var navLinks = Array.prototype.slice.call(
-    document.querySelectorAll('.site-nav a[href^="#"]')
-  );
-  var sections = navLinks
-    .map(function (link) {
-      return document.querySelector(link.getAttribute("href"));
-    })
-    .filter(Boolean);
-
-  function setCurrentSection(id) {
-    navLinks.forEach(function (link) {
-      if (link.getAttribute("href") === "#" + id) {
-        link.setAttribute("aria-current", "location");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
-  }
-
-  if ("IntersectionObserver" in window && sections.length) {
-    var navObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            setCurrentSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-35% 0px -55% 0px", threshold: 0 }
-    );
-
-    sections.forEach(function (section) {
-      navObserver.observe(section);
-    });
-  }
-
   /* --- Scroll reveal ----------------------------------------------------- */
 
   var revealObserver =
