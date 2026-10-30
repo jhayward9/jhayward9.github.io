@@ -967,6 +967,11 @@ ul {
   height: 100%;
 }
 
+/* A featured card with no bespoke artwork has only the body column. */
+.project--featured > .project-body:only-child {
+  grid-column: 1 / -1;
+}
+
 .project-head {
   display: flex;
   align-items: center;

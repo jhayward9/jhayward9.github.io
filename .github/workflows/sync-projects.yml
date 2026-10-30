@@ -1,0 +1,73 @@
+name: Sync project data
+
+on:
+  schedule:
+    # Hourly, a few minutes past the hour. GitHub may delay or skip scheduled
+    # runs under load, so treat this as "roughly hourly", not exact.
+    - cron: "23 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - projects.manifest.json
+      - scripts/sync-projects.mjs
+      - .github/workflows/sync-projects.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-project-data
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'jhayward9/jhayward9.github.io'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Full history keeps the rebase retry below from fighting a shallow clone.
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Regenerate projects.json
+        env:
+          # Authenticated calls get 5,000 requests/hour instead of 60.
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/sync-projects.mjs
+
+      - name: Commit only when something changed
+        run: |
+          set -euo pipefail
+
+          if [ -z "$(git status --porcelain -- projects.json)" ]; then
+            echo "projects.json is already current"
+            exit 0
+          fi
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add projects.json
+          git commit -m "chore: sync project data from GitHub"
+
+          # A human push can land between checkout and push; rebase and retry.
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin main
+            if git push; then
+              echo "pushed on attempt ${attempt}"
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+
+          echo "could not push after 3 attempts" >&2
+          exit 1

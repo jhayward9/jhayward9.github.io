@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "profile": "jhayward9",
+  "defaultOwner": "jhayward9",
+  "homeRepo": "jhayward9.github.io",
+
+  "copy": {
+    "intro": "{count} public repositories — a native guitar workstation, a privacy-first messenger, a hardware-aware LLM picker, client work, and a few experiments that escaped the lab.",
+    "allRepositories": "All repositories"
+  },
+
+  "autoInclude": {
+    "enabled": true,
+    "excludeForks": true,
+    "excludeArchived": false,
+    "skip": []
+  },
+
+  "defaults": {
+    "icon": "terminal",
+    "accent": "blue",
+    "badge": "Repository",
+    "tagLabel": "Details"
+  },
+
+  "languageColors": {
+    "JavaScript": "#f1e05a",
+    "TypeScript": "#3178c6",
+    "C#": "#178600",
+    "HTML": "#e34c26",
+    "CSS": "#663399",
+    "SCSS": "#c6538c",
+    "Python": "#3572a5",
+    "Shell": "#89e051",
+    "PowerShell": "#012456",
+    "Batchfile": "#c1f12e",
+    "Rust": "#dea584",
+    "Go": "#00add8",
+    "Java": "#b07219",
+    "Kotlin": "#a97bff",
+    "Swift": "#f05138",
+    "Dart": "#00b4ab",
+    "Ruby": "#701516",
+    "PHP": "#4f5d95",
+    "C": "#555555",
+    "C++": "#f34b7d",
+    "Lua": "#000080",
+    "Vue": "#41b883",
+    "Svelte": "#ff3e00",
+    "Astro": "#ff5a03",
+    "Markdown": "#083fa1",
+    "Dockerfile": "#384d54",
+    "Jupyter Notebook": "#da5b0b"
+  },
+
+  "projects": [
+    {
+      "repo": "virtualfantasyleague",
+      "title": "Virtual Fantasy League",
+      "kicker": "Sportsbook-as-an-app",
+      "badge": "Featured",
+      "icon": "trophy",
+      "accent": "green",
+      "featured": true,
+      "tagLabel": "Technologies",
+      "tags": ["JavaScript", "Local-first", "NHL data"],
+      "description": "A browser-based NHL fantasy betting league. It loads the current slate when it can, falls back to seeded demo games, and keeps members, bankrolls, bet slips, and settlement in local storage."
+    },
+    {
+      "repo": "rustychops",
+      "title": "Rustychops",
+      "badge": "Native Windows",
+      "icon": "music",
+      "accent": "pink",
+      "tagLabel": "Technologies",
+      "tags": ["C#", "WPF", "NAudio", "alphaTab"],
+      "description": "A native guitar-practice workstation in C# and WPF. Imports Guitar Pro and MusicXML scores, renders tab, synthesizes playback, loops tricky sections, and adds a live input meter and tuner."
+    },
+    {
+      "repo": "quimbyapp",
+      "title": "Quimby",
+      "badge": "Prototype",
+      "icon": "lock",
+      "accent": "violet",
+      "tagLabel": "Technologies",
+      "tags": ["JavaScript", "Web Crypto", "Privacy"],
+      "description": "An experimental self-destructing messenger built on Web Crypto. Messages are encrypted before they reach the relay, expire on schedule, and decrypted text never leaves the active session."
+    },
+    {
+      "repo": "jhayward9/llm-checker-executable",
+      "keepWhenMissing": true,
+      "title": "LLM Checker",
+      "badge": "Fork",
+      "icon": "cpu",
+      "accent": "blue",
+      "tagLabel": "Technologies",
+      "tags": ["Node.js", "Ollama", "CLI", "MCP"],
+      "languageLabel": "JavaScript",
+      "extraLinks": [
+        {
+          "label": "npm",
+          "url": "https://www.npmjs.com/package/llm-checker"
+        }
+      ],
+      "description": "A hardware-aware CLI that scans your machine and recommends local models it can actually run. Ollama integration, a 55k+ model registry, and an MCP server for coding assistants. Fork of signerless/llm-checker.",
+      "note": "Public API returns 404 as of 2026-10-30 (private or deleted). Card is kept from curated copy; its Repository link 404s for visitors until the repo is public again."
+    },
+    {
+      "repo": "lochlantech/c-dcleaningwebsite",
+      "title": "C&D Cleaning Services",
+      "badge": "Client work",
+      "icon": "sparkle",
+      "accent": "green",
+      "tagLabel": "Details",
+      "tags": ["Client site", "MIT licensed"],
+      "languageLabel": "Client work",
+      "languageColor": "#f2b46d",
+      "description": "A standalone website for C&D Cleaning Services, built and maintained as a straightforward marketing site for a local business.",
+      "note": "Transferred to lochlantech on 2026-10-23. Old jhayward9 URL redirects; card links resolve to the new owner."
+    },
+    {
+      "repo": "hockeyheroes_devsheet",
+      "title": "Hockey Heroes",
+      "badge": "In progress",
+      "icon": "clipboard",
+      "accent": "orange",
+      "tagLabel": "Details",
+      "tags": ["Product notes", "Timeline"],
+      "languageLabel": "Docs",
+      "languageColor": "#67b3ff",
+      "description": "The active development timeline and notes behind Hockey Heroes — the working notebook for the product rather than the product itself."
+    },
+    {
+      "repo": "jhayward9.github.io",
+      "title": "This website",
+      "badge": "You are here",
+      "icon": "code",
+      "accent": "indigo",
+      "tagLabel": "Technologies",
+      "tags": ["HTML", "CSS", "Vanilla JS"],
+      "languageLabel": "CSS",
+      "description": "A hand-built, mobile-first single page hosted on GitHub Pages. No framework, no build step — just HTML, CSS, and a little JavaScript."
+    }
+  ]
+}

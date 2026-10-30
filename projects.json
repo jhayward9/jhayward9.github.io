@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "profile": "jhayward9",
+  "count": 5,
+  "intro": "5 public repositories — a native guitar workstation, a privacy-first messenger, a hardware-aware LLM picker, client work, and a few experiments that escaped the lab.",
+  "allRepositories": "All repositories",
+  "repositoriesUrl": "https://github.com/jhayward9?tab=repositories",
+  "projects": [
+    {
+      "repo": "jhayward9/virtualfantasyleague",
+      "name": "virtualfantasyleague",
+      "owner": "jhayward9",
+      "missing": false,
+      "title": "Virtual Fantasy League",
+      "kicker": "Sportsbook-as-an-app",
+      "description": "A browser-based NHL fantasy betting league. It loads the current slate when it can, falls back to seeded demo games, and keeps members, bankrolls, bet slips, and settlement in local storage.",
+      "badge": "Featured",
+      "icon": "trophy",
+      "accent": "green",
+      "featured": true,
+      "tagLabel": "Technologies",
+      "tags": [
+        "JavaScript",
+        "Local-first",
+        "NHL data"
+      ],
+      "language": {
+        "label": "JavaScript",
+        "color": "#f1e05a"
+      },
+      "url": "https://github.com/jhayward9/virtualfantasyleague",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-07-11T14:06:05Z",
+      "archived": false,
+      "fork": false,
+      "extraLinks": []
+    },
+    {
+      "repo": "jhayward9/rustychops",
+      "name": "rustychops",
+      "owner": "jhayward9",
+      "missing": false,
+      "title": "Rustychops",
+      "kicker": null,
+      "description": "A native guitar-practice workstation in C# and WPF. Imports Guitar Pro and MusicXML scores, renders tab, synthesizes playback, loops tricky sections, and adds a live input meter and tuner.",
+      "badge": "Native Windows",
+      "icon": "music",
+      "accent": "pink",
+      "featured": false,
+      "tagLabel": "Technologies",
+      "tags": [
+        "C#",
+        "WPF",
+        "NAudio",
+        "alphaTab"
+      ],
+      "language": {
+        "label": "C#",
+        "color": "#178600"
+      },
+      "url": "https://github.com/jhayward9/rustychops",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-10-09T18:34:36Z",
+      "archived": false,
+      "fork": false,
+      "extraLinks": []
+    },
+    {
+      "repo": "jhayward9/quimbyapp",
+      "name": "quimbyapp",
+      "owner": "jhayward9",
+      "missing": false,
+      "title": "Quimby",
+      "kicker": null,
+      "description": "An experimental self-destructing messenger built on Web Crypto. Messages are encrypted before they reach the relay, expire on schedule, and decrypted text never leaves the active session.",
+      "badge": "Prototype",
+      "icon": "lock",
+      "accent": "violet",
+      "featured": false,
+      "tagLabel": "Technologies",
+      "tags": [
+        "JavaScript",
+        "Web Crypto",
+        "Privacy"
+      ],
+      "language": {
+        "label": "JavaScript",
+        "color": "#f1e05a"
+      },
+      "url": "https://github.com/jhayward9/quimbyapp",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-07-11T14:13:41Z",
+      "archived": false,
+      "fork": false,
+      "extraLinks": []
+    },
+    {
+      "repo": "jhayward9/llm-checker-executable",
+      "name": "llm-checker-executable",
+      "owner": "jhayward9",
+      "missing": true,
+      "title": "LLM Checker",
+      "kicker": null,
+      "description": "A hardware-aware CLI that scans your machine and recommends local models it can actually run. Ollama integration, a 55k+ model registry, and an MCP server for coding assistants. Fork of signerless/llm-checker.",
+      "badge": "Fork",
+      "icon": "cpu",
+      "accent": "blue",
+      "featured": false,
+      "tagLabel": "Technologies",
+      "tags": [
+        "Node.js",
+        "Ollama",
+        "CLI",
+        "MCP"
+      ],
+      "language": {
+        "label": "JavaScript",
+        "color": "#f1e05a"
+      },
+      "url": "https://github.com/jhayward9/llm-checker-executable",
+      "homepage": null,
+      "stars": null,
+      "forks": null,
+      "pushedAt": null,
+      "archived": false,
+      "fork": false,
+      "extraLinks": [
+        {
+          "label": "npm",
+          "url": "https://www.npmjs.com/package/llm-checker"
+        }
+      ]
+    },
+    {
+      "repo": "lochlantech/c-dcleaningwebsite",
+      "name": "c-dcleaningwebsite",
+      "owner": "lochlantech",
+      "missing": false,
+      "title": "C&D Cleaning Services",
+      "kicker": null,
+      "description": "A standalone website for C&D Cleaning Services, built and maintained as a straightforward marketing site for a local business.",
+      "badge": "Client work",
+      "icon": "sparkle",
+      "accent": "green",
+      "featured": false,
+      "tagLabel": "Details",
+      "tags": [
+        "Client site",
+        "MIT licensed"
+      ],
+      "language": {
+        "label": "Client work",
+        "color": "#f2b46d"
+      },
+      "url": "https://github.com/lochlantech/c-dcleaningwebsite",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-10-23T17:24:51Z",
+      "archived": false,
+      "fork": false,
+      "extraLinks": []
+    },
+    {
+      "repo": "jhayward9/hockeyheroes_devsheet",
+      "name": "hockeyheroes_devsheet",
+      "owner": "jhayward9",
+      "missing": false,
+      "title": "Hockey Heroes",
+      "kicker": null,
+      "description": "The active development timeline and notes behind Hockey Heroes — the working notebook for the product rather than the product itself.",
+      "badge": "In progress",
+      "icon": "clipboard",
+      "accent": "orange",
+      "featured": false,
+      "tagLabel": "Details",
+      "tags": [
+        "Product notes",
+        "Timeline"
+      ],
+      "language": {
+        "label": "Docs",
+        "color": "#67b3ff"
+      },
+      "url": "https://github.com/jhayward9/hockeyheroes_devsheet",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-10-28T16:53:25Z",
+      "archived": false,
+      "fork": false,
+      "extraLinks": []
+    },
+    {
+      "repo": "jhayward9/jhayward9.github.io",
+      "name": "jhayward9.github.io",
+      "owner": "jhayward9",
+      "missing": false,
+      "title": "This website",
+      "kicker": null,
+      "description": "A hand-built, mobile-first single page hosted on GitHub Pages. No framework, no build step — just HTML, CSS, and a little JavaScript.",
+      "badge": "You are here",
+      "icon": "code",
+      "accent": "indigo",
+      "featured": false,
+      "tagLabel": "Technologies",
+      "tags": [
+        "HTML",
+        "CSS",
+        "Vanilla JS"
+      ],
+      "language": {
+        "label": "CSS",
+        "color": "#663399"
+      },
+      "url": "https://github.com/jhayward9/jhayward9.github.io",
+      "homepage": null,
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-10-30T17:57:43Z",
+      "archived": false,
+      "fork": false,
+      "extraLinks": []
+    }
+  ]
+}
