@@ -46,11 +46,22 @@ function info(message) {
 
 /* --- GitHub API --------------------------------------------------------- */
 
-const TOKEN =
-  process.env.PROJECTS_TOKEN ||
-  process.env.GITHUB_TOKEN ||
-  process.env.GH_TOKEN ||
-  "";
+const TOKEN_SOURCE = process.env.PROJECTS_TOKEN
+  ? "PROJECTS_TOKEN"
+  : process.env.GITHUB_TOKEN
+  ? "GITHUB_TOKEN"
+  : process.env.GH_TOKEN
+  ? "GH_TOKEN"
+  : null;
+
+/* A personal access token can list private repos; github.token is an
+   installation token and cannot call /user/repos, so it only gets the public
+   listing. Both are cleared if the API rejects the credential. */
+const IS_PAT = TOKEN_SOURCE === "PROJECTS_TOKEN" || TOKEN_SOURCE === "GH_TOKEN";
+
+let TOKEN = TOKEN_SOURCE ? process.env[TOKEN_SOURCE] : "";
+let TOKEN_REJECTED = false;
+let CAN_LIST_ALL_REPOS = Boolean(TOKEN) && IS_PAT;
 
 const HEADERS = {
   Accept: "application/vnd.github+json",
@@ -60,27 +71,100 @@ const HEADERS = {
 
 if (TOKEN) HEADERS.Authorization = `Bearer ${TOKEN}`;
 
-async function github(url) {
+async function request(url) {
   const response = await fetch(url, { headers: HEADERS });
+  const status = response.status;
 
-  if (response.status === 404) {
-    return { found: false, data: null };
+  let data = null;
+  let message = "";
+
+  try {
+    data = await response.json();
+    if (!response.ok && data && typeof data.message === "string") {
+      message = data.message;
+    }
+  } catch {
+    data = null;
   }
 
-  if (response.status === 403 || response.status === 429) {
-    const reset = Number(response.headers.get("x-ratelimit-reset") || 0);
-    const when = reset ? new Date(reset * 1000).toISOString() : "later";
-    throw new Error(
-      `GitHub API rate limited (${response.status}); resets ${when}. ` +
-        "Set GITHUB_TOKEN to raise the limit."
+  return {
+    url,
+    status,
+    ok: response.ok,
+    data,
+    message,
+    remaining: response.headers.get("x-ratelimit-remaining"),
+    reset: Number(response.headers.get("x-ratelimit-reset") || 0)
+  };
+}
+
+/** Explains a failure precisely: rate limit, rejected credential, or other. */
+function describeFailure(res) {
+  const detail = res.message ? `: ${res.message}` : "";
+  const reset = res.reset ? new Date(res.reset * 1000).toISOString() : "later";
+
+  const limited =
+    res.status === 429 ||
+    (res.status === 403 &&
+      (res.remaining === "0" || /rate limit/i.test(res.message)));
+
+  if (limited) {
+    return new Error(
+      `GitHub API rate limited (${res.status}) on ${res.url}; resets ${reset}. ` +
+        (TOKEN && TOKEN_SOURCE
+          ? `Using ${TOKEN_SOURCE}.`
+          : "No token set: the anonymous limit is 60/hour and is shared with other jobs on the runner.")
     );
   }
 
-  if (!response.ok) {
-    throw new Error(`GitHub API ${response.status} for ${url}`);
+  if (res.status === 401 || res.status === 403) {
+    return new Error(
+      `GitHub API rejected ${TOKEN_SOURCE || "the anonymous request"} (${res.status}) ` +
+        `on ${res.url}${detail}. Check that the token is valid and can read the repos you expect.`
+    );
   }
 
-  return { found: true, data: await response.json() };
+  return new Error(`GitHub API ${res.status} on ${res.url}${detail}`);
+}
+
+/** Fails early when PROJECTS_TOKEN is broken, but keeps the public sync alive. */
+async function preflight() {
+  if (!CAN_LIST_ALL_REPOS) {
+    info(
+      `auth: ${
+        TOKEN_SOURCE
+          ? `${TOKEN_SOURCE} (installation token, public repos only)`
+          : "anonymous (60 requests/hour)"
+      }`
+    );
+    return;
+  }
+
+  const res = await request(`${API}/rate_limit`);
+
+  if (res.ok) {
+    info(`auth: ${TOKEN_SOURCE} (${res.data.resources.core.remaining} requests left)`);
+    return;
+  }
+
+  const rejected =
+    res.status === 401 ||
+    (res.status === 403 && !/rate limit/i.test(res.message) && res.remaining !== "0");
+
+  if (rejected) {
+    TOKEN_REJECTED = true;
+    TOKEN = "";
+    CAN_LIST_ALL_REPOS = false;
+    delete HEADERS.Authorization;
+    warn(
+      `${TOKEN_SOURCE} was rejected (${res.status}${
+        res.message ? `: ${res.message}` : ""
+      }); continuing with public repos only. Replace the secret to list private repos.`
+    );
+    return;
+  }
+
+  throw describeFailure(res);
 }
 
 /* --- Helpers ------------------------------------------------------------ */
@@ -184,7 +268,40 @@ function validateEntry(entry, index, tokens, defaults) {
 
 /* --- Build -------------------------------------------------------------- */
 
+/**
+ * Repos owned by the profile. /user/repos is the only listing that includes
+ * private repos, and it only works for a personal access token. github.token is
+ * an installation token and cannot call it, so that case uses the public list.
+ */
+async function listOwnedRepos(profile) {
+  if (CAN_LIST_ALL_REPOS) {
+    const privateRes = await request(
+      `${API}/user/repos?per_page=100&affiliation=owner&visibility=all&sort=pushed`
+    );
+
+    if (privateRes.ok) return privateRes.data;
+
+    if (privateRes.status === 403 || privateRes.status === 404) {
+      warn(
+        `/user/repos unavailable (${privateRes.status}` +
+          `${privateRes.message ? `: ${privateRes.message}` : ""}); using public repos only`
+      );
+    } else {
+      throw describeFailure(privateRes);
+    }
+  }
+
+  const publicRes = await request(
+    `${API}/users/${profile}/repos?per_page=100&type=owner&sort=pushed`
+  );
+
+  if (!publicRes.ok) throw describeFailure(publicRes);
+  return publicRes.data;
+}
+
 async function build() {
+  await preflight();
+
   const manifest = JSON.parse(await readFile(MANIFEST_PATH, "utf8"));
   const tokens = await loadDesignTokens();
 
@@ -222,18 +339,23 @@ async function build() {
     }
 
     const slug = fullName(entry, fallbackOwner);
-    const result = await github(`${API}/repos/${slug}`);
-    const repo = result.data;
+    const res = await request(`${API}/repos/${slug}`);
 
-    if (!result.found && !entry.keepWhenMissing) {
+    if (!res.ok && res.status !== 404) throw describeFailure(res);
+
+    const repo = res.ok ? res.data : null;
+
+    if (!repo && !entry.keepWhenMissing) {
       warn(
-        TOKEN
+        CAN_LIST_ALL_REPOS
           ? `${slug} was not found; dropped from the page`
+          : TOKEN_REJECTED
+          ? `${slug} is not public and PROJECTS_TOKEN was rejected; dropped from the page`
           : `${slug} is not public and no PROJECTS_TOKEN is set; dropped from the page`
       );
       continue;
     }
-    if (!result.found) {
+    if (!repo) {
       warn(`${slug} was not found; keeping curated copy`);
     }
 
@@ -244,7 +366,7 @@ async function build() {
       repo: slug,
       name,
       owner,
-      missing: !result.found,
+      missing: !repo,
       private: repo ? Boolean(repo.private) : false,
       title: entry.title || prettify(name),
       kicker: entry.kicker || null,
@@ -276,16 +398,12 @@ async function build() {
       )
     );
 
-    const listing = await github(
-      TOKEN
-        ? `${API}/user/repos?per_page=100&affiliation=owner&visibility=all&sort=pushed`
-        : `${API}/users/${profile}/repos?per_page=100&type=owner&sort=pushed`
-    );
+    const listing = await listOwnedRepos(profile);
 
-    if (!listing.found) {
+    if (!listing) {
       warn(`could not list repos for ${profile}; skipping auto-include`);
     } else {
-      const fresh = listing.data
+      const fresh = listing
         .filter((repo) => !curated.has(repo.full_name.toLowerCase()))
         .filter((repo) => !skip.has(repo.name.toLowerCase()))
         .filter((repo) => !(auto.excludeForks && repo.fork))
@@ -329,7 +447,7 @@ async function build() {
       !project.missing && project.owner.toLowerCase() === profile.toLowerCase()
   ).length;
 
-  if (!TOKEN) {
+  if (!TOKEN && !TOKEN_REJECTED) {
     warn(
       "no PROJECTS_TOKEN set: private repos are invisible, so a 404 may mean private rather than deleted"
     );
