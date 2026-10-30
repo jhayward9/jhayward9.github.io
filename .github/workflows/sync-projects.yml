@@ -38,6 +38,19 @@ jobs:
         with:
           node-version: 20
 
+      - name: Report token configuration
+        env:
+          PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+        run: |
+          # Never print the secret itself; just whether it exists.
+          if [ -n "${PROJECTS_TOKEN}" ]; then
+            echo "PROJECTS_TOKEN is set, so private repos will be requested"
+            echo "PROJECTS_TOKEN: **set**" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::warning::PROJECTS_TOKEN is not set: private repos are skipped, public repos only"
+            echo "PROJECTS_TOKEN: **not set** — private repos are skipped" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Regenerate projects.json
         env:
           # A PAT with Metadata: read on your private repos. Without it only

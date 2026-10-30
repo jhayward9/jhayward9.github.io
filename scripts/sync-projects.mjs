@@ -35,9 +35,19 @@ const QUIET = args.has("--quiet");
 
 const warnings = [];
 
+/* GitHub renders ::warning:: lines in workflow logs and the run summary. */
+function escapeCommand(text) {
+  return String(text).replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A");
+}
+
 function warn(message) {
   warnings.push(message);
-  if (!QUIET) console.warn(`warning: ${message}`);
+  if (QUIET) return;
+  if (process.env.GITHUB_ACTIONS === "true") {
+    console.log(`::warning::${escapeCommand(message)}`);
+  } else {
+    console.warn(`warning: ${message}`);
+  }
 }
 
 function info(message) {
@@ -403,6 +413,17 @@ async function build() {
     if (!listing) {
       warn(`could not list repos for ${profile}; skipping auto-include`);
     } else {
+      const visiblePrivate = listing.filter((repo) => repo.private).length;
+      info(`listing: ${listing.length} repos from ${profile} (${visiblePrivate} private)`);
+
+      if (CAN_LIST_ALL_REPOS && visiblePrivate === 0) {
+        warn(
+          `${TOKEN_SOURCE} sees 0 private repos: check that its repository access ` +
+            "includes them (fine-grained tokens need the private repos selected " +
+            "plus Metadata: read), or that you have none to show"
+        );
+      }
+
       const fresh = listing
         .filter((repo) => !curated.has(repo.full_name.toLowerCase()))
         .filter((repo) => !skip.has(repo.name.toLowerCase()))

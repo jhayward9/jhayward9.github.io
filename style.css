@@ -1311,12 +1311,14 @@ ul {
   color: var(--dim);
   font-size: 0.72rem;
   line-height: 1.65;
+  text-align: center;
 }
 
 .footer-col {
   display: grid;
   gap: 0.2rem;
   align-content: start;
+  justify-items: center;
 }
 
 .footer-name {
@@ -1328,6 +1330,7 @@ ul {
 .footer-location {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   gap: 0.35rem;
   color: var(--dim);
@@ -1341,7 +1344,7 @@ ul {
 }
 
 .footer-links a {
-  justify-self: start;
+  justify-self: center;
   color: var(--text-2);
   text-decoration: underline;
   text-decoration-color: var(--line-strong);
@@ -1416,15 +1419,6 @@ ul {
     grid-template-columns: 1fr auto 1fr;
     align-items: start;
     gap: 2rem;
-  }
-
-  .footer-links {
-    justify-items: center;
-  }
-
-  .footer-end {
-    justify-items: end;
-    text-align: right;
   }
 }
 
