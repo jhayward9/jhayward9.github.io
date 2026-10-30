@@ -223,14 +223,22 @@
     iconWrap.appendChild(svgIcon(project.icon || "terminal"));
     head.appendChild(iconWrap);
 
+    var badges = element("div", "project-badges");
+
     if (project.badge) {
-      head.appendChild(element("span", "project-badge", project.badge));
+      badges.appendChild(element("span", "project-badge", project.badge));
     }
+    if (project.private) {
+      badges.appendChild(element("span", "project-badge", "Private"));
+    }
+    if (badges.childNodes.length) head.appendChild(badges);
 
     body.appendChild(head);
 
     var title = element("h3");
-    var repoUrl = project.missing ? null : safeUrl(project.url);
+    /* Private and missing repos 404 for visitors, so neither title nor button links. */
+    var repoUrl =
+      project.missing || project.private ? null : safeUrl(project.url);
 
     if (repoUrl) {
       title.appendChild(externalLink(null, repoUrl, project.title, false));

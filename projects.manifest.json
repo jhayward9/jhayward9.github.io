@@ -5,7 +5,7 @@
   "homeRepo": "jhayward9.github.io",
 
   "copy": {
-    "intro": "{count} public repositories — a native guitar workstation, a privacy-first messenger, a hardware-aware LLM picker, client work, and a few experiments that escaped the lab.",
+    "intro": "{count} repositories — a native guitar workstation, a privacy-first messenger, a hardware-aware LLM picker, client work, and a few experiments that escaped the lab.",
     "allRepositories": "All repositories"
   },
 
@@ -88,7 +88,6 @@
     },
     {
       "repo": "jhayward9/llm-checker-executable",
-      "keepWhenMissing": true,
       "title": "LLM Checker",
       "badge": "Fork",
       "icon": "cpu",
@@ -103,7 +102,7 @@
         }
       ],
       "description": "A hardware-aware CLI that scans your machine and recommends local models it can actually run. Ollama integration, a 55k+ model registry, and an MCP server for coding assistants. Fork of signerless/llm-checker.",
-      "note": "Public API returns 404 as of 2026-10-30 (private or deleted). Card is kept from curated copy; its Repository link 404s for visitors until the repo is public again."
+      "note": "Returns 404 anonymously as of 2026-10-30. It leaves the page automatically when unreachable, and comes back as a Private card once PROJECTS_TOKEN can see it."
     },
     {
       "repo": "lochlantech/c-dcleaningwebsite",

@@ -1031,6 +1031,12 @@ ul {
   white-space: nowrap;
 }
 
+.project-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .project h3 {
   margin-top: 1rem;
   font-size: 1.24rem;

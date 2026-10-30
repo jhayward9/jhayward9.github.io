@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "profile": "jhayward9",
   "count": 5,
-  "intro": "5 public repositories — a native guitar workstation, a privacy-first messenger, a hardware-aware LLM picker, client work, and a few experiments that escaped the lab.",
+  "intro": "5 repositories — a native guitar workstation, a privacy-first messenger, a hardware-aware LLM picker, client work, and a few experiments that escaped the lab.",
   "allRepositories": "All repositories",
   "repositoriesUrl": "https://github.com/jhayward9?tab=repositories",
   "projects": [
@@ -11,6 +11,7 @@
       "name": "virtualfantasyleague",
       "owner": "jhayward9",
       "missing": false,
+      "private": false,
       "title": "Virtual Fantasy League",
       "kicker": "Sportsbook-as-an-app",
       "description": "A browser-based NHL fantasy betting league. It loads the current slate when it can, falls back to seeded demo games, and keeps members, bankrolls, bet slips, and settlement in local storage.",
@@ -42,6 +43,7 @@
       "name": "rustychops",
       "owner": "jhayward9",
       "missing": false,
+      "private": false,
       "title": "Rustychops",
       "kicker": null,
       "description": "A native guitar-practice workstation in C# and WPF. Imports Guitar Pro and MusicXML scores, renders tab, synthesizes playback, loops tricky sections, and adds a live input meter and tuner.",
@@ -74,6 +76,7 @@
       "name": "quimbyapp",
       "owner": "jhayward9",
       "missing": false,
+      "private": false,
       "title": "Quimby",
       "kicker": null,
       "description": "An experimental self-destructing messenger built on Web Crypto. Messages are encrypted before they reach the relay, expire on schedule, and decrypted text never leaves the active session.",
@@ -101,47 +104,11 @@
       "extraLinks": []
     },
     {
-      "repo": "jhayward9/llm-checker-executable",
-      "name": "llm-checker-executable",
-      "owner": "jhayward9",
-      "missing": true,
-      "title": "LLM Checker",
-      "kicker": null,
-      "description": "A hardware-aware CLI that scans your machine and recommends local models it can actually run. Ollama integration, a 55k+ model registry, and an MCP server for coding assistants. Fork of signerless/llm-checker.",
-      "badge": "Fork",
-      "icon": "cpu",
-      "accent": "blue",
-      "featured": false,
-      "tagLabel": "Technologies",
-      "tags": [
-        "Node.js",
-        "Ollama",
-        "CLI",
-        "MCP"
-      ],
-      "language": {
-        "label": "JavaScript",
-        "color": "#f1e05a"
-      },
-      "url": "https://github.com/jhayward9/llm-checker-executable",
-      "homepage": null,
-      "stars": null,
-      "forks": null,
-      "pushedAt": null,
-      "archived": false,
-      "fork": false,
-      "extraLinks": [
-        {
-          "label": "npm",
-          "url": "https://www.npmjs.com/package/llm-checker"
-        }
-      ]
-    },
-    {
       "repo": "lochlantech/c-dcleaningwebsite",
       "name": "c-dcleaningwebsite",
       "owner": "lochlantech",
       "missing": false,
+      "private": false,
       "title": "C&D Cleaning Services",
       "kicker": null,
       "description": "A standalone website for C&D Cleaning Services, built and maintained as a straightforward marketing site for a local business.",
@@ -172,6 +139,7 @@
       "name": "hockeyheroes_devsheet",
       "owner": "jhayward9",
       "missing": false,
+      "private": false,
       "title": "Hockey Heroes",
       "kicker": null,
       "description": "The active development timeline and notes behind Hockey Heroes — the working notebook for the product rather than the product itself.",
@@ -202,6 +170,7 @@
       "name": "jhayward9.github.io",
       "owner": "jhayward9",
       "missing": false,
+      "private": false,
       "title": "This website",
       "kicker": null,
       "description": "A hand-built, mobile-first single page hosted on GitHub Pages. No framework, no build step — just HTML, CSS, and a little JavaScript.",
@@ -223,7 +192,7 @@
       "homepage": null,
       "stars": 0,
       "forks": 0,
-      "pushedAt": "2026-10-30T18:58:15Z",
+      "pushedAt": "2026-10-30T19:14:47Z",
       "archived": false,
       "fork": false,
       "extraLinks": []

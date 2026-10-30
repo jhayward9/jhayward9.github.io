@@ -40,7 +40,9 @@ jobs:
 
       - name: Regenerate projects.json
         env:
-          # Authenticated calls get 5,000 requests/hour instead of 60.
+          # A PAT with Metadata: read on your private repos. Without it only
+          # public repos are visible; github.token still raises the rate limit.
+          PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/sync-projects.mjs
 

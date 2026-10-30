@@ -10,7 +10,8 @@
      node scripts/sync-projects.mjs --check    # fetch and validate only
      node scripts/sync-projects.mjs --quiet    # suppress warnings
 
-   Auth: set GITHUB_TOKEN (or GH_TOKEN) for 5,000 req/hr instead of 60.
+   Auth: set PROJECTS_TOKEN (a personal access token) to include private repos
+   and raise the limit from 60 to 5,000 req/hr. GITHUB_TOKEN / GH_TOKEN also work.
    Override the endpoint with GITHUB_API_BASE (offline tests / Enterprise).
    Exits non-zero on any hard failure, so a broken sync never publishes.
    ========================================================================== */
@@ -45,7 +46,11 @@ function info(message) {
 
 /* --- GitHub API --------------------------------------------------------- */
 
-const TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || "";
+const TOKEN =
+  process.env.PROJECTS_TOKEN ||
+  process.env.GITHUB_TOKEN ||
+  process.env.GH_TOKEN ||
+  "";
 
 const HEADERS = {
   Accept: "application/vnd.github+json",
@@ -221,11 +226,15 @@ async function build() {
     const repo = result.data;
 
     if (!result.found && !entry.keepWhenMissing) {
-      warn(`${slug} is not reachable publicly; dropped from the page`);
+      warn(
+        TOKEN
+          ? `${slug} was not found; dropped from the page`
+          : `${slug} is not public and no PROJECTS_TOKEN is set; dropped from the page`
+      );
       continue;
     }
     if (!result.found) {
-      warn(`${slug} is not reachable publicly; keeping curated copy`);
+      warn(`${slug} was not found; keeping curated copy`);
     }
 
     const name = slug.split("/")[1];
@@ -236,6 +245,7 @@ async function build() {
       name,
       owner,
       missing: !result.found,
+      private: repo ? Boolean(repo.private) : false,
       title: entry.title || prettify(name),
       kicker: entry.kicker || null,
       description: cleanText(entry.description || (repo && repo.description)),
@@ -267,7 +277,9 @@ async function build() {
     );
 
     const listing = await github(
-      `${API}/users/${profile}/repos?per_page=100&type=owner&sort=pushed`
+      TOKEN
+        ? `${API}/user/repos?per_page=100&affiliation=owner&visibility=all&sort=pushed`
+        : `${API}/users/${profile}/repos?per_page=100&type=owner&sort=pushed`
     );
 
     if (!listing.found) {
@@ -287,10 +299,11 @@ async function build() {
           name: repo.name,
           owner: repo.owner.login,
           missing: false,
+          private: Boolean(repo.private),
           title: prettify(repo.name),
           kicker: null,
           description: cleanText(repo.description),
-          badge: defaults.badge || null,
+          badge: repo.private ? "Private" : defaults.badge || null,
           icon: defaults.icon,
           accent: defaults.accent,
           featured: false,
@@ -310,11 +323,17 @@ async function build() {
     }
   }
 
-  /* Count only public repos that actually exist under your own account. */
+  /* Count only repos that exist under your own account, public or private. */
   const count = projects.filter(
     (project) =>
       !project.missing && project.owner.toLowerCase() === profile.toLowerCase()
   ).length;
+
+  if (!TOKEN) {
+    warn(
+      "no PROJECTS_TOKEN set: private repos are invisible, so a 404 may mean private rather than deleted"
+    );
+  }
 
   const copy = manifest.copy || {};
   const introTemplate = copy.intro || "{count} public repositories.";
