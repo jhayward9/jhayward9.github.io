@@ -1,0 +1,6 @@
+{
+  "name": "Hockey Heroes - 2.5D Tech Art & Asset Roadmap",
+  "description": "Lead Technical Artist & Product Director Workbench for Hockey Heroes in Unreal Engine 5.4, featuring Camelot GBA-style 2.5D pipeline specifications, 8-directional flipbook roadmap, and multiplatform optimization tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

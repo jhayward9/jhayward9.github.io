@@ -1,0 +1,453 @@
+# Hockey Heroes — Project progress report context
+
+Last project scan: **October 29, 2026 (UTC)**. Latest scanned commit: `9e4a7d2`; existing uncommitted gameplay/input/documentation work was included in this scan. Original report baseline: `74c6909`. This is the persistent project-wide progress report; update this file on subsequent requested project/progress scans.
+
+**Sprint 13 fixed and verified — October 29, 2026:** Legacy 16-action settings now migrate to the 17-action layout with existing keyboard/gamepad customizations preserved. Occupied Switch defaults receive free alternatives; invalid files roll back safely. Fresh build and all six suites passed at **16:12:32–16:12:33 UTC**, including migration regressions; all ten gameplay traces match Sprint 11. **Sprints 01–13 are complete (13/100); next is 14**, with **87 original tickets remaining (14–100)**. Rink art remains **12/12**. [Fix and evidence](exhibition-sprint13/13_saved_controls_fix.md). The earlier independent-review finding is resolved.
+
+**Latest project-wide rescan (rescan 6, October 29, 2026):** Exhibition **13/100** is complete, next **14: movement tuning**; 87 original tickets remain. Separate rink art remains **12/12**, character/action source delivery **44/44**, customization/economy **2/60**, next **CE-03**. Read all four referenced chats and added linked checklists, supplied Camarad/Frontier school lore, three player-named central characters and sponsor restrictions. Story implementation and actual store catalogue remain pending. Latest existing six-suite result: **16:12:32–16:12:33 UTC**, including saved-controls migration fixes. Inventoried **1,527** project files at commit `9e4a7d2` plus existing uncommitted work; no fresh runtime tests were performed.
+
+## How to read and update this report
+
+**Latest scoped customization/art refresh — October 29, 2026:** Re-read current customization plans, Unreal profile/creation/rendering and slot-save evidence; reran the PNG-header/manifest inventory at `9e4a7d2` plus the current working tree. Customization/economy remains **2/60**, next **CE-03**, with no modular creator or economy runtime yet. Four standing customization design sheets/palettes exist, but aligned animated layers, masks and hockey identity occlusion are outstanding. Fresh source presence is **44/44 hockey sheets**, zero missing registered paths. Existing furniture/UI can be reused; item/food/drink icon counts await user catalogues. [Detailed art request and development status](CUSTOMIZATION_ART_ASSETS_REQUIRED.md), [fresh audit evidence](data/customization-asset-audit-2026-10-29.json). This is a scoped refresh, not a new full-project rescan or build/playtest; other counters and prior verification evidence remain unchanged.
+
+- **Implemented** means source exists for the stated scope. **Recorded verification** means a prior report/log supports it. **Available art** means a source file exists, not that it is imported, animated or visually accepted. **Planned** means a requirement or proposal has no completed runtime implementation.
+- Retain separate records for art delivery, engine integration, functional completion and human acceptance. Do not turn source-file counts or elapsed sprint hours into overall game completion percentages.
+- Rescan the whole repository inventory, current source, manifests, tests and relevant documents. Include untracked working files; record material changes and contradictions. Exclude Git internals, caches and build products from authored-project completion counts; inspect generated logs only as supporting evidence.
+- Preserve explicit sprint counts until their acceptance criteria and completion records justify an update. Record work outside those counters separately. Preserve remaining requirements, deferred decisions, user-document dependencies and current priority.
+- Update the date, evidence, status tables, next work and change log in this file. Do not create a competing progress report for every scan. Change gameplay only under a separate authorized task; this file is a report, not approval for proposed mechanics.
+
+## Percentage-complete dashboard
+
+Added October 29, 2026 at the user's request. **Percentage = completed units / listed scope × 100**, rounded to one decimal where needed. Existing sprint budgets remain the basis for Exhibition/customization. Other subjects use the explicit checkpoints below; they are equally weighted status checkpoints, not estimates of hours or total game completion. Partial work receives no completion credit until its checkpoint passes. Do not average these percentages: scopes overlap and units differ. No gameplay completion changed when these statistics were added.
+
+| List / scope measured | Complete | Percentage complete | Exact basis / remaining scope |
+|---|---:|---:|---|
+| Exhibition original sprint budget | 13/100 | **13%** | Sprints 01–13; 87 original tickets remain, next 14. Includes 20 contingency tickets in original budget; newly added scope remains separate |
+| Rink-art integration tickets | 12/12 | **100%** | Delivered RA-01–12 scope; later gameplay-dependent visual/human acceptance still applies |
+| Character/action source-sheet delivery | 44/44 | **100%** | Registered PNG presence only; not playable animation certification |
+| Character/action production acceptance | 0/7 | **0%** | Seven open checks in section 2: frames, scale, contact anchors, runtime clips, coverage, occlusion/readability and future-state visuals |
+| Overworld art production/integration checkpoints | 3/11 | **27.3%** | Existing protagonist sheets, live winter-scenery set and arena/practice landmarks complete; eight remaining production/integration items in section 1 |
+| Overworld asset requirements audit | 1/1 | **100%** | Missing-versus-reusable asset list delivered; this is planning completion, not finished artwork |
+| Overworld prototype function | 7/9 | **77.8%** | Movement, collision, doors, NPC dialogue, activity returns, scrolling camera and menu/pause gates implemented; runtime Tiled import and final story-map expansion pending |
+| UI / polish tasklist | 3/12 | **25%** | Of the 12 reconciled UI tasks, shared-kit asset production, three-slot saves and Customize Controls complete; partial HUD/story/screens receive no additional credit |
+| Shared UI-kit asset production | 60/60 | **100%** | Recorded validated kit exports; final screen integration separate |
+| Customization/economy sprint milestone | 2/60 | **3.3%** | CE-01/02; next CE-03. Twelve contingency tickets excluded from planned-work denominator |
+| Modular appearance creator runtime | 0/4 | **0%** | Layer resolver, free picker/preview, cross-mode saved appearance and paid-edit flow pending; design sheets/plans are not these functions |
+| Currency / store / equipment runtime | 0/4 | **0%** | Wallet/earnings, atomic persisted purchases, shop UI and equipment/loadout/modifiers pending |
+| Store catalogue delivery | 0/1 | **0%** | Actual user-approved item list absent; linked chat is currently a placeholder |
+| Bedroom customization runtime | 0/4 | **0%** | Owned catalogue/purchases, place/move/store editor, collision/exit validation and persisted rendering pending |
+| Food / beverage runtime | 0/4 | **0%** | Approved catalogue/effects, inventory/shop, pre-match use and expiry/reload lifecycle pending |
+| Story requirements checklist | 1/12 | **8.3%** | Initial world/cast/sponsor/naming direction received; 11 open checklist items remain in section 6 |
+| New Camarad school-story runtime | 0/4 | **0%** | New identity/location flow, named friend/cousin saves, authored chapter/dialogue and campaign progression pending; old Cedarbrook slice excluded |
+| Two-year campaign calendar | 0/4 | **0%** | Event/time schema, fixed fixture progression, calendar UI and quit/missed-event/reload verification pending |
+| RPG progression prototype baseline | 4/4 | **100%** | XP, level-50 cap, allocation/decay and progression persistence implemented; unspecified Defense/Pass/Special effects and future modifiers excluded |
+| Three-slot Story-save baseline | 7/7 | **100%** | Independent slots, create/continue, deletion confirmation, legacy import, safe writes, backup recovery and failure/version handling delivered |
+| Future save-system extensions | 0/4 | **0%** | Appearance/economy, bedroom/inventory/boosts, named cast/story flags and calendar/event data pending; no exact mid-match resume implied |
+| Controls / input acceptance checkpoints | 4/8 | **50%** | Remapping, persistence/migration, named keyboard/pad routing and menu isolation complete; physical-device matrix, controller-only playthroughs, device glyphs and broader accessibility pending |
+| Dedicated mini-game delivery | 0/4 | **0%** | User guide/rules, first activity, rewards/persistence and complete retry/return validation pending; practice hockey is not a dedicated mini game |
+| Audio / SFX delivery and integration | 0/8 | **0%** | Eight open audio checklist groups; list creation complete but no audio production/playback delivered |
+| Windows release readiness | 0/5 | **0%** | Packaged distribution, supported-machine/performance acceptance, full human playthrough, final credits/licenses and release branding/materials pending; dev launchers excluded |
+| Console ports | 0/3 | **0%** | No completed Xbox, PlayStation or Nintendo port; this is target-port count, not platform-access approval |
+| Online / backend milestone | 0/3 | **0%** | Multiplayer/networking, authentication/profile/matchmaking service and persistent backend pending |
+
+These checkpoints make each percentage reproducible. When scope grows or an acceptance gate changes, record the revised denominator and rationale in the change log; preserve prior sprint evidence.
+
+## Overall snapshot
+
+Hockey Heroes has playable prototype foundations in Godot/C# and Unreal/C++. The current development target is **Unreal Engine 5.8**, under `unreal/HockeyHeroes`; Godot remains the behavior/reference prototype. Native Unreal Canvas with JSON atlases is the active renderer. Paper2D is enabled as part of the target foundation, but a completed Paper2D rendering migration is not established.
+
+| Subject | Current status | Remaining work |
+|---|---|---|
+| Overworld art | Winter town, protagonist sprites and venue landmarks available/in use; many additional room/prop packs available | Seamless terrain, modular architecture, distinct cast, house/interior staging, signs, sorting and Unreal visual acceptance |
+| Hockey art | **44/44** player/action source sheets supplied; separate rink art **12/12 integration tickets complete** | Player-sheet production/state integration and human acceptance remain; rerun rink visuals after selection/full-roster/clock/penalty changes |
+| UI / polish | Shared UI kit assets, functional menus, three Story slots and Customize Controls utility implemented | Branding/splash, final layouts/kit integration, HUD/results/transition polish, remaining settings/accessibility, audio and release presentation |
+| Sprite creator / customization and economy | **2/60 planned sprints complete**: CE-01 and CE-02 | CE-03–60, production layers and end-to-end customization/economy gates; 12 contingency tickets separate |
+| Hockey function / Exhibition | **13/100 original sprints confirmed complete**; rink art **12/12** | Next Sprint 14: movement tuning; 87 original tickets remain (14–100). Saved-controls migration fixed and tested. Shootout/poke scope still requires estimation |
+| Story requirements | Initial Camarad/Frontier school lore supplied in referenced chat; runtime remains the older Cedarbrook slice | Opening/structure and competition brief, three-character naming/save work, full content and story implementation |
+| Items / currency / bedroom | Requirements and partial decisions documented; furniture source art exists | Wallet, transactions, equipment, inventory, room editor, consumables and their saved state are not implemented |
+| Saves | Unreal three-slot careers, deletion/import/recovery implemented | Appearance/economy/calendar schema extensions; exact world or mid-match state remains outside current saves |
+| Controls / controller support | Keyboard/gamepad remapping, saved bindings, dynamic prompts, controller name entry and disconnect pause implemented; software automation recorded passing | Physical USB/Bluetooth device matrix, complete controller playthroughs, device glyphs, accessibility and platform conventions |
+| Audio / SFX | [Detailed asset backlog created](AUDIO_SFX_ASSET_BACKLOG.md); no authored audio files or gameplay playback found in the reviewed source | UI/hockey/overworld effects, music/ambience, delivery/licensing, runtime event integration, mixing/settings and audio acceptance |
+| Other required systems | Movement, hockey simulation, RPG stats, launchers and six automation suites exist | Dedicated mini games, expanded acceptance testing, packaging/performance, audio and console ports/platform access |
+
+**Current execution position:** Existing priority history includes customization/economy and later explicit Exhibition/art requests. Recorded next tickets are **CE-03** and **Exhibition 14**; this report update runs neither backlog. Story premise is now supplied, but structure/scheduling decisions are still needed before story sprint planning. The store thread has no actual catalogue yet. Calendar implementation remains additional scope beyond CE-26.
+
+**October 29 scoped override:** the user requested Exhibition Sprint 02, now complete. Its [reference comparison and repeatable drills](../assets/art/hockey/context_docs/EXHIBITION_SPRINT02_REFERENCE_AND_DRILLS.md) record direct observations, proposals and unresolved reference questions separately. Next Exhibition ticket is 03. This scoped instruction does not erase the customization/economy priority or imply authorization to run the remaining Exhibition backlog automatically.
+
+**Subsequent Sprint 03 request completed:** [independent match configuration](../assets/art/hockey/context_docs/EXHIBITION_SPRINT03_MATCH_CONFIG.md) supplies equal fixed ratings without a career/profile dependency in the Exhibition simulation; standalone and title entry paths use it. Story practice/league retain career ratings. Five-suite regression passed; next Exhibition ticket is 04. Reward callbacks and presentation still need that separate isolation ticket.
+
+**Subsequent Sprint 04 request completed:** [reward/save isolation](../assets/art/hockey/context_docs/EXHIBITION_SPRINT04_REWARD_ISOLATION.md) preserves career state and career files across both Exhibition entry paths, completion, restart, rematch and quit. Period/result XP consumers and progression display are separated; Story retains rewards. Fixed Exhibition results Back/Escape routing. Build, all five suites and transient rendered HUD check passed. Next Exhibition ticket is 05; Specials and broader gameplay remain unfinished.
+
+**Subsequent Sprint 05 request completed:** [naming consistency](../assets/art/hockey/context_docs/EXHIBITION_SPRINT05_NAMING.md) aligns Exhibition Mode HUD, pause, help, restart/results and canonical launcher. Legacy launcher/argument aliases and internal map identifiers remain supported; Story labels retain their behavior. Build, all five suites, launcher routing checks and four rendered captures passed. Next Exhibition ticket is 06. Specials, side selection and broader gameplay remain unfinished.
+
+**Subsequent Sprint 06 request completed:** [Home/Away setup and navigation](../assets/art/hockey/context_docs/EXHIBITION_SPRINT06_SIDE_SELECTION.md) lets both entry paths start either side without a career, with Back/Escape focus restored. Movement/actions, marker/camera, attack guidance and results follow the chosen center; restart/rematch retain the side. Both-side persistent save isolation, Story regression and all five suites passed at 03:13:54 UTC. Five rendered views inspected; next Exhibition ticket is 07. Switching/receiver transfer, Specials removal and broader gameplay remain unfinished.
+
+**Subsequent Sprint 07 request completed:** [seeded offline scenarios and event capture](../assets/art/hockey/context_docs/EXHIBITION_SPRINT07_SCENARIOS.md) provide fixed-step scripts, bounded seeded fixture variation and compact CSV snapshots of selected center, ownership, actions and match phases. Ten Home/Away traces exported; repeatability, invalid-input rejection, reset and full-match finish checks pass. Build and all six suites passed at 03:27:59 UTC. Live gameplay is unchanged; next Exhibition ticket is 08.
+
+**Subsequent Sprint 08 request completed:** [foundation regression](exhibition-sprint08/08_foundation_checkpoint.md) passed a fresh build and six-suite run at 07:46:03–07:46:04 UTC. [Reviewed user decisions](exhibition-sprint08/08_decisions_reviewed.md) replace the inaccurate local-model tables, preserve confirmed choices and map pending rules to later tickets. Fatigue removed from planned scope; period-break lines, OT/shootout, full-strength pulls and clarified penalty handling are design requirements awaiting implementation. Next is 09; do not jump to 41. No gameplay or source tests changed.
+
+**Subsequent Sprint 09 request completed:** [validated actor actions](exhibition-sprint09/09_actor_actions.md) support all six skaters for shooting, own-team passing and checking, safely reject invalid/ineligible IDs, and preserve AI/center adapters. New modular checks run inside HockeySimulation; all six suites passed at 08:00:41 UTC. SHA-256 comparison found 10/10 pre/post seeded CSVs identical. Next is 10; switching and receiver transfer remain unfinished.
+
+Sources: [design](../GAME_DESIGN.md), [customization plan](CHARACTER_CUSTOMIZATION_AND_ECONOMY.md), [customization backlog](CUSTOMIZATION_ECONOMY_ONE_HOUR_SPRINTS.md), [Exhibition context](EXHIBITION_CONTEXT.md).
+
+## Referenced chats and cross-project checklist
+
+Read all five referenced chats on October 29, 2026, including the subsequently added UI-planning chat. Human requirements below are distinguished from assistant proposals and current source implementation. Chat messages are context, not evidence of shipped features.
+
+| Referenced chat | Recorded requirements / progress | Remaining gate |
+|---|---|---|
+| [Add Hockey Heroes story and lore](thread://01a184fe-949e-79c2-b44c-cac7e547f25d?hostId=local) | World, school premise, three player-named central characters and sponsor restrictions supplied; preserved in section 6 below | Story structure/opening, competition/scheduling brief and supporting character decisions before story sprint planning/runtime implementation |
+| [Add character appearance customization](thread://01a184e8-bc51-73b3-b964-cdc768342706?hostId=local) | Free new-save picker, later paid edits, equipment, bedroom and food/drink scope; **CE-01 and CE-02 done, 2/60** | CE-03 schema next; layered art first required at CE-13; no working modular creator or economy yet |
+| [Add store item list](thread://01a184fe-f7af-7a21-b016-a6b8bead46ed?hostId=local) | Chat designated for store catalogue; **no actual item list supplied in its current contents** | User-approved item names/categories, descriptions, prices, effects, availability/unlocks/limits and corresponding art |
+| [List needed overworld assets](thread://01a184d7-5965-7e31-8aac-12915d03e74a?hostId=local) | Art audit/list completed in [RPG/overworld backlog](RPG_OVERWORLD_ART_BACKLOG.md); existing reusable packs distinguished from missing assets | Distinct cast, seamless terrain, modular interiors, signs and runtime-ready character layers; staging/integration of existing packs |
+| [Plan Hockey Heroes UI screens](thread://01a184d9-1b43-71a3-b191-02de3afaf468?hostId=local) | [UI/UX screen inventory](UI_UX_SCREEN_INVENTORY.md) created; shared UI kit production, three Story saves and Customize Controls completed within their stated scope | Branding, final screen/kit integration, HUD/XP/transitions, audio, story copy, economy UI, device/accessibility checks, console ports and release materials |
+
+- [x] Read and connect the five chats to this report; preserve supplied lore, customization/economy direction and UI/polish tasklist.
+- [x] Complete overworld asset requirements audit; this is list completion, not completion of the art.
+- [x] Complete customization CE-01 asset audit and CE-02 currency/cadence decision record.
+- [ ] Convert the supplied story premise into development sprints after opening/structure decisions; no story sprint count is established.
+- [ ] Receive the store item/equipment and food/drink catalogues. Existing example items are not confirmed by the empty store thread.
+- [ ] Complete free/paid appearance editing, transactions, equipment, bedroom and temporary consumable effects.
+- [ ] Supply/integrate production overworld and character assets against the authored locations and confirmed story cast.
+
+## 1. Overworld art
+
+### Available and implemented foundations
+
+- Male/female casual directional character sheets, winter snow/straight paths, pines, rocks, benches and hockey statue.
+- Domed official-arena exterior and outdoor practice-rink landmarks. The town has home, Maya's house, Finn's house, arena and square, connected paths, collision and scrolling exploration.
+- Existing art packs cover three house exteriors, household furnishings, small-arena exterior/foyer/hallway/practice rink, locker room, gym, stairs/windows, town hall, mayor/assistant and announcer. These packs should be reused where suitable; asset existence does not establish active map integration.
+- Unreal town/stadium presentation and collision are authored in C++ (`HHTown.cpp`, `HHPrototypeViews.cpp`). Many houses, furniture and people still use procedural/reused presentation rather than finished bespoke assets.
+
+### Remaining production and integration
+
+- [ ] Seamless snow/paving, path turns/junctions/end caps, plaza edges and building thresholds.
+- [ ] Modular floor/wall corners, partitions, doors and occlusion pieces.
+- [ ] Stage the player's home and Maya/Finn interiors with available exteriors/furniture; preserve safe walking routes and doors.
+- [ ] Distinct Coach, Maya, Finn and Eli sprites rather than reused protagonist appearances.
+- [ ] Entrance signs, location identification and any adopted arrival banners.
+- [ ] Normalize palette, pixel density, scenery scale, feet pivots, depth sorting and transparent edges in Unreal.
+- [ ] Production metadata for any accepted placeable bedroom items and character layers.
+- [ ] Tiled runtime map import. `tiled/` has authoring assets/tilesets; this is not proof of a working runtime importer.
+
+Portraits, reaction animations, extra residents/locations and mini-game-specific props remain conditional on their content scope. Art supply is the user's responsibility; the recorded project direction says not to generate artwork or modify source images during these tickets.
+
+Evidence: [overworld context](OVERWORLD_CONTEXT.md), [art backlog](RPG_OVERWORLD_ART_BACKLOG.md), [asset integration](ASSET_INTEGRATION.md), `assets/art/*/README.md`, `src/TownPresentation.cs`, `src/TownLayout.cs`, Unreal `Private/Simulation/HHTown.cpp` and `Private/UI/HHPrototypeViews.cpp`.
+
+## 2. Hockey art
+
+The live prototype has an existing vertical arena, goals, team sheets, locomotion/crossover animation and fallback action/goalie presentation. The newer 2.5D sprite package is a separate production/integration effort. A sprite specification or source manifest does not replace the live Unreal atlas manifest or implement the proposed projected ground-plane renderer.
+
+**Source delivery complete (October 29, 2026):** all 44 texture filenames in the Exhibition source manifest exist at their expected paths. The earlier scoped audit records successful decoding of all 44 at 1024×1024; this project-wide rescan independently reconfirmed path existence and PNG header dimensions. All ten formerly missing sheets are supplied; no registered source files remain missing. Decoding was not rerun in this rescan. The live Unreal atlas has no references matching the new source filenames or normalized filename stems; completed integration is not established.
+
+**New rink source delivery (October29 scoped review):**38 decoded PNGs (10 overview/atlas images plus28 slices),14 bounded manifest regions, transparent exports supplied. Original overviews are848×1264, resized overviews800×1200. The source handoff manifest is preserved; a separate44-region runtime adapter now loads four imported textures/two UI materials. Modular geometry-aligned integration is delivered; the baked overview is not used as a calibrated rink. [Art implementation and verification](exhibition-rink-art/RA01-12_integration.md). Original44-sheet count refers to the separate registered character/action package.
+
+Remaining acceptance work:
+
+- [ ] Validate delivered frames/transparency, actual cell bounds, feet pivots, team colors, directional consistency and silhouettes.
+- [ ] Reconcile the proposed 256-pixel cells at 0.125 scale with existing sprite conventions at the actual gameplay camera.
+- [ ] Define stick/blade/puck release anchors and separate puck/shadow/trail elements.
+- [ ] Prepare/import approved runtime exports and bind clips to authoritative simulation states without changing gameplay timing.
+- [ ] Review backward skating/braking, diagonal action fallbacks, shot-type distinctions and goalie coverage as those functions ship.
+- [ ] Verify both goals, raised objects, behind-net layering, selected-player marker and puck visibility.
+- [ ] Add penalty/bench/fighting visuals with their gameplay milestones. Available pose art does not mean those mechanics exist.
+
+The complete source delivery does not block the next Exhibition reference-analysis/drills ticket. Additional visual integration needs its own estimate because the original gameplay plan assumed reuse of existing graphics.
+
+Evidence: [art handoff](../assets/art/hockey/EXHIBITION_PROTOTYPE_ART_CONTEXT.md), [sprite specification](../assets/art/hockey/HOCKEY_SPRITES_UNREAL_CONTEXT.md), [source manifest](../assets/art/hockey/data/prototype-art-exhibition.json), live `unreal/HockeyHeroes/Content/HockeyHeroes/Data/prototype-art.json`, Unreal HUD/view source.
+
+## 3. UI / polish work
+
+### Referenced UI tasklist — reconciled October 29, 2026
+
+Source: [Plan Hockey Heroes UI screens](thread://01a184d9-1b43-71a3-b191-02de3afaf468?hostId=local), read in full during this update, and the [local screen inventory](UI_UX_SCREEN_INVENTORY.md). Older chat completion messages describe their own four/five-suite runs; the latest project record is six suites. No separate UI sprint denominator has been established.
+
+| Task | Status | Remaining distinction |
+|---|---|---|
+| Shared UI kit: fonts, panels, buttons, cursors, icons, input prompts | Asset production complete | Apply the kit to final Unreal layouts and verify the resulting screens |
+| Three independent Story save slots | Implemented and previously verified | Final slot-card styling and future story/appearance/economy data are separate work |
+| Customize Controls on title/pause | Implemented and previously verified | Named Switch and legacy settings migration now included; physical devices still need acceptance |
+| LochLAN splash, title branding and app icon | Pending | Display supplied company logo before title, preserve its proportions; finish game wordmark/background/icon |
+| Final screen layouts and kit integration | Pending final treatment | Functional title, Home/Away setup, slots, pause/help/dialogue/stats/results already exist; finish consistency, focus, wrapping and styling |
+| Hockey HUD, announcements, XP feedback and transitions | Partial | Rink scoreboard and selected markers are implemented; final announcements/transition treatment and Story XP presentation remain |
+| Music, ambience and sound effects | Pending | [Audio/SFX asset and integration checklist](AUDIO_SFX_ASSET_BACKLOG.md); no delivered audio established |
+| Story content, tutorials and UX writing | Partial requirements / pending production | Initial lore is supplied; opening, final dialogue/objectives/tutorial/error copy remain |
+| Customization/economy screens and future save fields | Pending | Creator, purchases, equipment/loadout, bedroom editor and pre-match items; CE backlog remains 2/60 |
+| Physical gamepads, prompts and accessibility | Pending acceptance | Generic PC input exists; device matrix, complete controller playthroughs, glyphs, text/contrast and scoped accessibility settings remain |
+| Xbox/PlayStation/Nintendo ports | Pending | Approvals, SDK/devkits, storage/users, platform builds, suspend/resume and certification |
+| Credits, licenses and release graphics | Pending | Contributor/asset notices, package/store art and distribution captures |
+
+Confirmed launch intent: supplied LochLAN logo → Hockey Heroes title with **Exhibition Mode** and **Story Mode**, plus **Customize Controls** as a utility. Three slots belong to Story; standalone Exhibition must not write them. A working menu or asset export does not complete the entire UI/polish milestone.
+
+Completed asset work: original shared pixel font/bitmap atlas, panels, button states, cursor/icons and keyboard/generic controller badges; 60 kit manifest entries are recorded as validated in the kit documentation. This is an asset-production milestone, not completion of game screens or controller support.
+
+Implemented Unreal flow includes two game modes, **Exhibition Mode / Story Mode**, plus a **Customize Controls** utility on title and pause; exactly three Story slots; create/continue, explicit deletion confirmation, legacy import, unreadable-slot handling, safe saves and backups. Menus still use the prototype Canvas skin and engine small font.
+
+Newly implemented controls work:
+
+- [x] Seventeen remappable actions including Switch, with paged controls, independent Keyboard/Gamepad bindings, digital input capture/cancel, context-aware conflict checks and confirmed default restoration.
+- [x] Version 1 `controls.json` settings independent of all Story slots, temporary-file replacement, invalid-file defaults and save-failure feedback; transient sessions avoid production writes.
+- [x] Generic PC gamepad action routing, left-stick digital thresholds, D-pad/arrow aliases, fixed menu navigation and controller character-by-character name entry.
+- [x] Remapped town/hockey prompts and help, menu/gameplay input isolation, release gating and recognized gamepad-disconnect pause with deliberate resume.
+
+The stick threshold remains 0.4 and movement remains digital; this work does not establish analog skating speed, rumble, native support for every controller, per-player device ownership or console certification. Physical-device and full controller-only acceptance remain below.
+
+Outstanding:
+
+- [ ] Supplied LochLAN logo splash, Hockey Heroes wordmark/title background and application icon.
+- [ ] Integrate the shared kit and complete title, slots, character setup, dialogue, stats, pause, controls/settings and results layouts.
+- [ ] Exhibition setup and mode-specific HUD/results; avoid Story progression/Special prompts in the final standalone design.
+- [ ] Goal/period announcements, Story XP/level feedback, location/save notices, transitions and useful errors.
+- [ ] Economy screens: appearance previews, balance/price confirmations, shops, loadout, room editing and pre-match consumable use.
+- [ ] Physical Xbox/PlayStation/Nintendo controller testing where intended: USB/Bluetooth, stick/trigger thresholds and drift, reconnect/focus loss and complete controller-only career/match playthroughs.
+- [ ] Device-specific glyphs/platform navigation, text wrapping and target-resolution legibility; remaining accessibility settings. Software remapping/input gates are implemented, with hardware acceptance still pending.
+- [ ] Music, ambience, hockey/menu effects and audio controls. No audio files were found in the authored inventory during this scan.
+- [ ] Final tutorial/dialogue/button copy, credits, attribution/license records and distribution graphics.
+
+Evidence: [UI screen inventory](UI_UX_SCREEN_INVENTORY.md), [controls implementation and console targets](CONTROLS_AND_CONSOLE_TARGETS.md), [shared kit](../assets/ui/shared/README.md), `tools/generate_ui_kit.py`, Unreal `HHInputSettings.h/.cpp`, `HHFoundationHUD.cpp` / `HHPrototypeViews.cpp` / `HHSession.cpp`.
+
+## Audio / SFX assets still needed
+
+See the [full audio/SFX asset backlog](AUDIO_SFX_ASSET_BACKLOG.md), created October 29, 2026. Its requirements audit is complete; asset delivery, import and playback are not complete. No separate audio sprint count or fixed production quantity is established.
+
+- [ ] Shared UI: move, confirm, cancel, unavailable/error, save-success and failure cues.
+- [ ] Hockey: skating/stopping, pickup/reception, pass/shot release, boards/posts, checks/falls, goalie saves, whistle, goal/period/final horns and crowd reactions.
+- [ ] Music/ambience: title, town, home/interior, match presentation, results; arena crowd/practice room tone and winter/interior ambience.
+- [ ] Overworld/RPG: footsteps/doors, interaction/dialogue, XP, level-up and committed stat allocation.
+- [ ] Feature-dependent cues: shops/equipment, appearance editing, bedroom placement, food/drink effects, training, expanded rules and approved Story Specials.
+- [ ] Audio direction, original/licensed sources, editable masters, lossless exports, loop metadata and attribution manifest.
+- [ ] Runtime event hooks, bounded voice playback, category volume/mute settings, pause/transition behavior and visual equivalents for meaningful cues.
+- [ ] Speakers/headphones mix review, packaged-output/device checks and later platform acceptance.
+
+This is an asset/planning update, not a new whole-project scan or new gameplay verification. The inventory search found only the visual sound icon, not audio content. Existing gameplay and sprint counters remain unchanged.
+
+## 4. Sprite creator function — 2/60 (3.3%)
+
+### Updated customization-chat check — October 29, 2026
+
+Re-read the latest completed turn in [Add character appearance customization](thread://01a184e8-bc51-73b3-b964-cdc768342706?hostId=local). Its update delivers a **more detailed art request and current inventory**, not a completed implementation sprint. Cross-checked the [art delivery checklist](CUSTOMIZATION_ART_ASSETS_REQUIRED.md), [dated asset audit](data/customization-asset-audit-2026-10-29.json), CE backlog and current Unreal profile/creation source.
+
+**Confirmed percentages remain:** customization/economy **2/60 = 3.3%**; modular appearance runtime **0/4 = 0%**. CE-03 remains next. Existing three-slot saves are reusable groundwork, not automatic completion of CE-07–12 or new appearance persistence.
+
+| Outstanding art delivery | Required production form | Timing |
+|---|---|---|
+| Technical sample | Layered front idle and side walking pose, matching composites, recolor masks, palette map, canvas/foot/head anchors and layer order | First art dependency: CE-13; target delivery by end of CE-12 |
+| Body / skin | Shared silhouette, four skin palettes, clean garment separation and aligned movement frames | CE-14 |
+| Hair | Six initial styles, five palettes, front/back separation, masks and helmet-compatible coverage | CE-15; hockey coverage CE-17 |
+| Facial features | Two eye shapes, four iris colors, neutral nose/mouth and anchored directional views | CE-15 |
+| Casual clothes / shoes | Three shirt colors, jeans/sweats and low-top sneakers as compatible four-direction animated layers | CE-16 |
+| Hockey identity | Skin/face/hair layers or validated overlays across supported locomotion/action poses, with team uniform/helmet overrides | CE-17–18 |
+| Equipment and food/drink icons | One per approved catalogue entry; exact names/counts still await user lists | Equipment before CE-41 visual acceptance; food/drink CE-49–50 |
+| Bedroom asset preparation | Reuse suitable furniture; supply thumbnails, placement footprints, anchors and accepted views | CE-43 |
+
+Standing design sheets and flattened hockey sheets do not satisfy interchangeable animated layers. The shared UI kit and existing furniture can be reused; a Cash symbol is optional. Final frame dimensions are validated at CE-13 before producing the full animation pack. No new artwork is needed for CE-03–12. No request to generate/modify source art is implied; the user supplies deliveries.
+
+The runtime still lacks the modular compositor/picker, customized animated preview, appearance-part save IDs, paid editing, wallet/transactions, equipment, room editor and consumable effects. The new checklist is planning progress and does not increase functional completion. Other project percentages remain unchanged by this scoped check.
+
+The user's “sprite creator” counter tracks the **whole customization/economy milestone**, not just a sprite editor. It covers 60 planned one-hour tickets plus CE-61–72 contingency. **2/60 (3.3% of planned tickets)** is a ticket count, not a measure of functional completeness.
+
+| Ticket / phase | Status and deliverable |
+|---|---|
+| CE-01 | Done: source/catalogue audit and bounded asset request; standing designs are not runtime layers |
+| CE-02 | Done: confirmed Cash/event/campaign direction recorded; item prices/effects and calendar edge cases remain deferred |
+| CE-03–06 | Not recorded complete: schema, free/paid creator and shop/room/item wireframes, regression fixtures |
+| CE-07–12 | Existing three-slot implementation overlaps this phase; extended economy schema and full ticket gates are not all complete, so no automatic ticket credit |
+| CE-13–18 | Pending: production layer/mask/frame contract, body/face/hair/clothing/hockey identity layers, import and combination review |
+| CE-19–24 | Pending: compositor/resolver, options/colors, four-direction animated preview, free confirmation, saved appearance across town/hockey and end-to-end checks |
+| CE-25–30 | Pending: wallet, earnings, atomic purchases, safe persistence, balance/confirmation UI and isolation checks |
+| CE-31–36 | Pending: paid appearance-service access, draft/edit/review/commit/cancel/failure/reload |
+| CE-37–42 | Pending: equipment ownership/upgrades/loadout, approved modifiers, shop and complete-loop validation |
+| CE-43–48 | Pending: bedroom catalogue/ownership, placement/move/store, collision/exit checks and persistence |
+| CE-49–54 | Pending: food/drink inventory, purchase/use, temporary effects/expiry, quit/retry/reload and verification |
+| CE-55–60 | Pending: complete new-career journey, recovery/isolation/regression, visual/input review, human playtest and handoff |
+
+Current runtime supports name/gender and whole-sheet appearance selection. It has no modular parts/palette picker or appearance-ID persistence. Four design sheets and palette data exist under `assets/art/characters/customization-v1`, but still need aligned directional walking/action layers, masks and helmet/uniform occlusion.
+
+No new art is required through CE-12. CE-13's first real asset dependency is a layered technical sample, ideally supplied by the end of CE-12; full production layers are required for CE-14–18. Free new-save selection must preview/review before writing; gender and appearance must be independently selectable. Paid edits must commit cost and appearance together exactly once.
+
+Evidence: [60-ticket backlog and log](CUSTOMIZATION_ECONOMY_ONE_HOUR_SPRINTS.md), [CE-01 catalogue](CUSTOMIZATION_CATALOGUE_CE01.md), [CE-02 decision record](ECONOMY_RULES_CE02.md), [audit data](data/customization-ce01-audit.json).
+
+**October 29 delivery refresh:** Use [the current missing-art checklist](CUSTOMIZATION_ART_ASSETS_REQUIRED.md) instead of the historical six-icon examples. First delivery is one layered front idle and side walking pose with masks for CE-13; full character layer/animation coverage is needed in CE-14–18. Existing house furniture needs production metadata/integration, not automatic replacement drawings. New equipment/food/drink icon names/counts await the user's final lists. Fresh [asset audit](data/customization-asset-audit-2026-10-29.json) confirms 44/44 flattened hockey sources, which do not supply modular appearance layers. No sprint count increased during this report update.
+
+## 5. Hockey function — 13/100
+
+**Sprints 01–13 are confirmed complete; next is Sprint 14.** Named actions/Switch and legacy saved-controls migration pass the final six-suite regression, including old defaults/customizations, conflict-safe Switch assignment, save/reload and malformed-file rollback. [Fix verification](exhibition-sprint13/13_saved_controls_fix.md). Original count 13/100; 87 tickets remain (14–100). Rink art remains separately complete at 12/12. These are delivered-ticket counts, not overall game completion percentages.
+
+Implemented prototype foundation: two teams of three skaters plus automatic goalie, momentum/coasting/reversal, sprint, directional timed shooting/passing, receiver lead/interception, checks/stuns, swept puck/boards/posts/nets, goals, three 60-second periods, end changes, simple AI and pause/restart/results/rematch. Story retains rookie control and XP/stats. Exhibition now has chosen-side selected-skater simulation control with equal fixed match-local ratings; selection defaults to center and transfers on completed passes; marker/camera follow selection. Switch input and legacy saved-binding migration are implemented and verified. Pass/check Specials remain in shared simulation; Special Shot is removed.
+
+Completed sprint deliverables:
+
+| Sprint | Current completion evidence |
+|---|---|
+| 01 | Baseline build, simulation/flow inventory and rendered evidence |
+| 02 | Timestamped reference observations, explicit evidence gaps and repeatable drill recipes |
+| 03 | Validated independent `MatchConfig`, equal fixed Exhibition ratings and Story career-rating adapter |
+| 04 | Both Exhibition entry paths preserve career state/files across results/restart/rematch/quit; no period/result career XP or XP/level HUD; navigation fixes |
+| 05 | Consistent Exhibition Mode labels and canonical `Play Unreal Exhibition Mode.cmd`; legacy launcher/argument aliases preserved |
+| 06 | Home/Away setup on both entry paths, chosen-center actions/movement/camera/marker and side-aware guidance/results; side retained on restart/rematch |
+| 07 | Offline seeded 120 Hz scenarios and compact CSV state/command capture; both-side drills, validation and sixth automation suite |
+| 08 | Fresh foundation build/six-suite regression; corrected decision record with direct clarifications, affected tickets and pending-policy gates; sequential dependency and fatigue-scope corrections |
+| 09 | Validated actor-ID shoot/pass/check APIs; all current skater roles and both directions; safe rejection/queue behavior, preserved AI adapters and ten identical baseline traces |
+| 10 | Selected-skater movement/action routing, eligibility and deterministic defensive switching with0.18s lock; independently reviewed build/six suites and10 unchanged traces |
+| 11 | Completed-pass transfer to actual eligible receivers; chained passes and opponent/goalie exclusions verified |
+| 12 | Selected star, off-screen marker and camera wired to selection; identity stays on center; four existing captures reviewed |
+| 13 | Named action/Switch routing and menu/device isolation; legacy16/current17 binding load with explicit action mapping, conflict-safe Switch defaults and atomic rollback; all six suites passed16:12:32–33 UTC |
+
+**Remaining isolation boundary:** Exhibition ratings and career rewards/saves are separated, but Specials are still exposed by shared input/simulation. Do not claim complete no-Special Exhibition behavior. The former standalone hockey launcher now routes to Exhibition setup through a compatibility alias; it no longer establishes the earlier session-XP laboratory behavior as current.
+
+Remaining planned scope:
+
+- [x] Sprint 08: foundation regression and policy checkpoint; [pending decisions mapped to affected future tickets](exhibition-sprint08/08_decisions_reviewed.md).
+- [ ] Remove Exhibition Special gauge/actions; expand setup with match settings when their tickets ship. Fixed ratings, career isolation and Home/Away selection are already implemented.
+- [x] Validated actor-ID actions (09), selected-skater state and defensive-switch simulation API (10).
+- [x] Pass-reception transfer (11), selected marker/camera (12), named Switch/input routing and saved-controls migration (13).
+- [ ] Movement tuning (14), backward skating, and dynamic roster owner/selection plus AI-target reconciliation before penalties/substitutions.
+- [ ] Pass/lane/lead tuning, catches versus blocks/deflections, shot preparation, buffered one-timers and reviewed saucer passes.
+- [ ] Committed directional checks, contact/recovery, body separation and anti-stun-lock behavior.
+- [ ] Positional team AI and finite-state goalies with saves, rebounds, covers and distribution.
+- [ ] Complete match settings/clocks (default accelerated 2×), faceoffs, five-minute OT then shootout, results/rematch and configurable 5/10/20-minute periods.
+- [ ] Offsides, icing, minors, penalty-box strength, power play/kill, penalty shots and fighting when enabled.
+- [ ] Rosters/period-break line changes, goal-stoppage timeout, manual/automatic goalies, full-strength pull/return goalie and safe randomized extra-attacker roles. Fatigue is removed; no energy/performance modifiers planned.
+- [ ] Physical keyboard/controller and full-match acceptance, setting interactions, release validation. Generic PC controller routing/remapping now exists as shared work outside the Exhibition sprint counter.
+
+Resolve the reviewed record's remaining core-rule questions before their affected tickets. Tape to Tape-inspired Exhibition direction supersedes the earlier NHL 94-only direction **for Exhibition**; career design is not silently replaced. Exhibition fatigue is removed entirely by the user's Sprint 08 decision; older fatigue/energy requirements are superseded.
+
+Evidence: [Exhibition context, complete sprint plan and baseline](EXHIBITION_CONTEXT.md), Unreal `HHHockey.h/.cpp`, `HHSession.cpp`, `HHPrototypeTests.cpp`.
+
+## 6. Story requirements
+
+**Supplied story direction, not yet integrated:** the player is **14**, from **Frontier, Normund**, in **Camarad**, and enters an elite hockey school in Frontier alongside their childhood best friend. Their same-age cousin from **Superior, Hisery** is the rival. The journey lasts two years, pursuing provincial and potentially national championships. The player names **the protagonist, best friend and cousin when creating a new save**; none has a fixed canon name. Player gender is chosen, including a nonbinary option. Best-friend/cousin gender and detailed personality are not settled by these notes.
+
+| Province | Supplied inspiration | Major cities |
+|---|---|---|
+| Normund | Prairies, especially Saskatchewan | Frontier (player home), Riversdale, Bearclaw, Marmalade (Normund capital) |
+| Hisery | Ontario | Superior; three placeholder cities |
+| Petryl | Alberta | Four placeholder cities |
+| Van Isles | British Columbia | Four placeholder cities |
+
+Camarad's name evokes Canada and camaraderie, with a Camelot tribute. Hisery combines Erie/Hisui; Petryl evokes petroleum/dinosaurs; Van Isles evokes Vancouver/islands; Normund has plains/Plains Cree and English-sounding influences. Eleven city names remain placeholders, as requested. These notes do not authorize building sixteen cities before defining the playable chapter.
+
+**Sponsors:** Gener Sous sponsors the player and best friend; Jim Berry, an eastern Camarad technology entrepreneur, sponsors the cousin. They own **teams in a national league**. Human clarification forbids identifying their teams, cities or franchises in game story/dialogue. Real-world creative inspirations and name wordplay are authoring notes, not approved dialogue. Their motives and scene roles remain open.
+
+**Capital ambiguity:** the supplied notes both explicitly say Superior is not Camarad's capital and later call it the national capital. The other chat's assistant proposed treating it as Hisery's provincial capital, but the human has not resolved the contradiction. Keep Camarad's national capital and Superior's exact capital status unresolved; its location in Hisery is supplied.
+
+**Special shots/saves:** requested story coverage remains a placeholder. The other chat's signature-technique blurb is an assistant proposal; fantastical versus athletic interpretation, unlocks and mechanics are unconfirmed.
+
+**Current runtime differs:** the prototype still introduces a **12-year-old Cedar Comets rookie in Cedarbrook**, with home/family, Maya, Finn, Eli and Coach, practice and three local wins before City All-Stars. Source searches found no Camarad/Frontier/sponsor implementation or saved best-friend/cousin names. This working content is preserved as prototype reference; do not report the new school/lore as playable or silently map Maya/Finn to the new player-named cast.
+
+Confirmed later campaign direction: two years, 32 competing teams, fixed weekly league match plus three practices, additional regionals every two months and annual year-end matches. Match/practice appointments consume half a game day; mini games consume one hour. **No scheduler/calendar implementation is established by current Profile/Session/Town source.**
+
+- [x] Receive initial world geography, fourteen-year-old school premise, central relationships, sponsor restrictions and three-character naming requirement through the story chat.
+- [ ] Define first playable chapter: start scene, end milestone, required locations and minimum supporting cast.
+- [ ] Define main conflict, tone/audience, player motivation/home life and dialogue-choice scope.
+- [ ] Define school name, boarding/home arrangement and ordinary-school/hockey balance.
+- [ ] Define year-one/year-two milestones, provincial/national competition sequence, qualification/fixtures and relationship arcs for friend/cousin.
+- [ ] Define sponsor motives/appearances, special-shot/save story interpretation, loss progression and ending conditions.
+- [ ] Clarify Superior's capital status; name remaining cities only as their content becomes necessary.
+- [ ] Extend creation/save schema for player, best-friend and cousin names and later story flags; preserve existing careers safely.
+- [ ] Define day/hour model, missed appointments, quitting/retrying, ties/abandonment rewards, regionals/year-end overlap and tournament payout frequency.
+- [ ] Add explicitly estimated scheduler tickets, event IDs/time advancement, persistence, calendar UI and validation.
+- [ ] Author production dialogue, tutorials/objectives, match context, location requirements and final narrative flow.
+- [ ] Add persistent conversation/story flags and conditional access only after requirements establish them. Journal/map/quest/key-item systems remain conditional.
+
+The general narrative section in `GAME_DESIGN.md` still contains TBD placeholders. This report now preserves the supplied premise locally, while story structure and implementation remain pending. Do not infer a 32-team bracket, consider a complete story manuscript delivered, or treat assistant-proposed capital/ability details as confirmed.
+
+## 7. Item / currency / bedroom requirements
+
+**Confirmed Cash rules, not implemented runtime:** start with 50; completed practice pays 5 regardless of outcome; league win 25; regional win 50; year-end win 100; match loss pays 10. Match loss pay does not apply to practice. Tie/abandonment and some tournament/calendar cases remain unresolved.
+
+| System | Requirement | Status / dependency |
+|---|---|---|
+| Wallet and earnings | Per-career nonnegative balance; event/reward identity prevents duplicate payouts | Pending schema, approved event lifecycle and implementation |
+| Purchases | Validate price/funds/availability; deduction and grant persist together once; honest save errors | Pending shared transaction/runtime work |
+| Appearance service | Paid later editing with preview, price, resulting balance and safe cancel/no-change behavior | Await user appearance-change document; price/location not confirmed |
+| Equipment | Buy/upgrade/own/equip items; effects separate from permanent allocation | Await user item/equipment list, tiers/effects/prices and runtime work |
+| Bedroom | Buy decorations, place/move/store owned items, reload layout; avoid overlap and blocked exits | Existing furniture designs available; final catalogue, footprints/grid/controls/prices and editor pending |
+| Food / beverages | Buy/store/use before matches; show temporary effects and expiry | Await user list and approved magnitude/duration/stacking/limits/quit/reload policy |
+
+Previously suggested equipment, food/drink and decoration names/prices/effects remain **unapproved examples**. Do not treat CE-02 closure as approval of all archived proposals. The earlier proposed 50-Cash home appearance service is not confirmed.
+
+Profile schema 3 currently stores identity, level/XP/growth points, five stats, wins and champion flag. It has no wallet, appearance parts, inventories, equipment loadout, room placements, boost state or fixed event/calendar data. Exhibition now uses its own `MatchConfig` ratings; Story still uses a shared career-rating adapter. Personal equipment/consumable modifiers must become actor-aware so they do not modify opponents or permanent stats.
+
+User-document checkpoints: scheduling brief before calendar/competition implementation; appearance-service document before final paid flow/CE-31–36; equipment list before CE-37–42; decoration list before CE-43; food/drink rules before CE-49–54; mini-game guide before dedicated activities/rewards. Generic CE-03 architecture can proceed before those documents arrive.
+
+Evidence: [economy decisions and delivery checkpoints](ECONOMY_RULES_CE02.md), [requirements](CHARACTER_CUSTOMIZATION_AND_ECONOMY.md), design section 4, Unreal `HHCore.h/.cpp` and `HHSession.cpp`.
+
+## 8. Other required work and implemented foundations
+
+- **Overworld function:** shared 16-unit four-direction stepping at 88 units/sec, taps/held input, center turns, collision, facing interaction, doors/rooms, safe return and menu/pause input gates implemented. Larger footprints, moving NPCs and runtime Tiled importing are not completed features.
+- **RPG progression:** level 1–50, XP, 49 possible growth points and five 0–20 stats implemented. Allocation is +2 selected / -0.125 others. Speed/Shoot have gameplay formulas; new Defense/Pass/Special effects remain TBD. Preserve these rules during economy work.
+- **Three-slot saves:** Unreal create/continue/delete/import, temporary replacement, per-slot backup recovery and future-version/load-error handling implemented. Original career file preserved. Extended economy state and exact world/mid-match resume remain future scope. Legacy import is not proof of complete Godot-save parity.
+- **Mini games:** outdoor practice launches a hockey match. Dedicated shooting/skating/passing/conditioning activities, tiers, unlocks and records are proposed rather than implemented. Await user guide; implement one specified activity at a time.
+- **Engineering/migration:** three native prototype entry points, launch/build/import/capture scripts, C++ simulation and automated checks exist. Production art integration, final rendering direction and broader parity/human acceptance remain open.
+- **Scenario diagnostics:** offline seeded runner, fixed 120 Hz scripts, compact CSV event/state capture and Home/Away drill exports implemented. Two sample traces are tracked under `docs/data/exhibition-sprint07`; the completion record reports ten exported traces checked. These are test fixtures, not mini games, live gameplay changes, full trajectory recording or cross-platform lockstep certification.
+- **Controls:** shared keyboard/gamepad action settings and remapping implemented in Unreal, with controller menu/name entry and dynamic prompts. `ControlsAndGamepad` covers software resolution, persistence, conflicts, capture/cancel/defaults, input blocking and corrupt-file fallback; real device certification is outstanding.
+- **Release:** development launchers are available; packaged Windows executable, supported-machine testing, performance measurements, release credits/licenses and final distribution checks are outstanding.
+- **Console targets:** Windows first, with requested Xbox, PlayStation and Nintendo releases. Platform-holder/Epic access, authorized SDKs/devkits, platform storage/user handling, controller ownership/conventions, suspend/resume, performance/safe-area review, platform builds and certification remain outstanding. No platform onboarding or console build is established by PC gamepad support. See [console target record](CONTROLS_AND_CONSOLE_TARGETS.md).
+- **Online/backend:** original Node/Express/Postgres and online architecture direction remains a later milestone. No authored server, SQL schema or package manifest was found. Godot ENet/RPC references do not establish an Unreal network implementation.
+
+## 9. Verification evidence and scan limitations
+
+The latest project-wide rescan inventoried **1,527 non-ignored project files**, compared with 1,520 at rescan 5. Read all four referenced chats, current design and source/schema, sprint 11–13 completion/fix records, selection/input presentation, manifests and existing six-suite log. Exhibition receiver transfer, selection marker/camera and named Switch routing are implemented; saved 16-action controls now migrate safely to 17 actions. Reconfirmed all 44 character/action source paths present. No authored Camarad/Frontier/sponsor runtime or saved best-friend/cousin names were found. The store chat contains no actual items. No additional customization/economy, calendar, overworld production or release milestone is established; no fresh image decoding, build, gameplay/device test or visual acceptance was performed.
+
+The existing `unreal/HockeyHeroes/Saved/Logs/prototype-tests.log`, inspected during rescan 6, records six successful suites on **October 29, 2026, at 16:12:32–16:12:33 UTC**:
+
+- `HockeyHeroes.CareerAndPrototypeFlows`
+- `HockeyHeroes.ControlsAndGamepad`
+- `HockeyHeroes.ExhibitionScenarios`
+- `HockeyHeroes.GridAndTown`
+- `HockeyHeroes.HockeySimulation`
+- `HockeyHeroes.ThreeSaveSlots`
+
+These are **prior run results inspected during this scan**, not new tests. Sprint 13 fix records a successful Editor build, six passing suites including old/current saved-controls migration, conflict-safe Switch defaults and malformed-file rollback, plus ten traces unchanged from Sprint 11. Sprint 12 records selected-marker/camera capture review. Rink-art build/captures and bounded timing samples remain historical evidence, not full-match/full-roster/device acceptance. This report adds no new runtime validation.
+
+Reproduction: `unreal/HockeyHeroes/Verify-Prototypes.ps1` now builds and runs all six Unreal suites, including ExhibitionScenarios added by Sprint 07. Godot reference checks are documented in `README.md`; use them when relevant to changes. Documentation validation for this report checks local links and formatting; it does not certify game behavior. Fresh scoped sprint verification is recorded in the dated entries above and below, separately from the historical rescan evidence.
+
+## 10. Contradictions and reconciliation notes
+
+1. Resolved source-delivery mismatch: all 44 hockey sheets are now supplied. Track runtime integration and visual acceptance separately from source availability.
+2. `CHARACTER_CUSTOMIZATION_AND_ECONOMY.md` retains an older single-file/three-slots-planned statement. `THREE_SLOT_SAVES.md`, current source and prior four-suite log establish that three Unreal slots are implemented. The extended customization/economy save schema is still pending.
+3. The title rename predated Sprint 05; its remaining HUD/help/menu/launcher naming audit is now complete, with legacy launcher aliases retained. Special removal/settings/team-control remain unfinished.
+4. Root README/design headings and copied historical context retain older engine, missing-document paths and NHL 94-only language. Prefer current Unreal target and mode-specific direction. Several old `docs/*.md` links now point to content consolidated in `EXHIBITION_CONTEXT.md`, `OVERWORLD_CONTEXT.md` or archived copies under `assets/art/hockey/context_docs`.
+5. `UNREAL_PROTOTYPES.md` describes three historical suites and save documentation records four; controls work brought the count to five, and Sprint 07 added ExhibitionScenarios. Current verification script/source/log require six successful suites.
+6. Art style specifications describe a desired 2.5D projection; current source still uses native Canvas/atlas presentation. Do not report the proposed transform or Paper2D path as shipped solely because it appears in an asset specification.
+7. Standalone no-save/no-career-XP guards exist, but the shared simulation/input still supports Specials. The final no-Special Exhibition requirement remains open.
+8. Older context says gamepad actions/remapping are absent or TBD. Current controls source, implementation record and fifth passing suite supersede that status for generic PC input; physical device acceptance and console integration remain open. Customize Controls is a utility alongside the two game modes.
+
+These mismatches are recorded here for future reconciliation; this scan does not rewrite the historical source records or disturb existing uncommitted work.
+
+## 11. Next work and change log
+
+Recommended customization sequence: CE-03 schema design; reconcile implemented three-slot foundations against CE-07–12 criteria; wireframes and regression fixtures; obtain the technical character-layer sample by CE-13; then complete appearance/economy phases. Expand calendar scope explicitly before implementing fixed campaign scheduling. Current separately recorded Exhibition position is 13/100, next 14, with 87 original tickets remaining; rink art remains 12/12. Historical references to next Exhibition 11 and 90 remaining are superseded by the Sprint 13 completion/fix evidence. This scoped report update starts neither backlog.
+
+| Scan date (UTC) | Changes established | Verification |
+|---|---|---|
+| 2026-10-29 (customization/art request, scoped refresh) | Confirmed CE-01/02 complete, 2/60; CE-03 next. Published outstanding layer/mask/animation and catalogue-dependent icon deliveries; distinguished existing furniture/UI reuse. Reconciled stale single-save and 34/44 source statements; current source sheets 44/44. Other project counters unchanged | Reran read-only PNG-header/palette/region/clip/source-presence audit; reviewed current profile, creator/rendering and slot-save records. Documentation checks passed; no art changes, fresh engine tests or full-project rescan |
+| 2026-10-29 (Sprint 13 compatibility fix, scoped) | Resolved legacy16-to-current17 binding migration; preserved custom action identities on both devices, assigned free Switch alternatives on conflict and retained rollback/file preservation. Original13/100, next14;87 original tickets remain; rink art12/12. No full-project rescan | Final incremental build succeeded (19.93s); six suites passed16:12:32–33 UTC with new migration regressions;10/10 traces match Sprint11. No rendering/physics changes or new device/capture test |
+| 2026-10-29 (review through Sprint 13, scoped) | Confirmed 11–12; found missing 16-to-17-action saved-controls migration in 13 despite its completion report. Verified count 12/100, next resolve 13; 88 original tickets remain; rink art 12/12. No source changes or full-project rescan | Fresh incremental build and all six suites passed 16:05:54 UTC; 10/10 traces match Sprint 11. Source review shows strict row-count rejection and shifted action indices. Reviewed four existing Sprint 12 captures; no new render/device test |
+| 2026-10-29 (rink-art block, scoped) | User movedRA-01–12 before original11. All12 delivered: optional44-region skin, four textures/two UI materials, quiet ice/markings, calibrated goals, glass, seating/benches/desk, context variants and live HUD. Original10/100, next11;90 original tickets remain. Source PNGs unchanged; no full-project rescan | Build succeeded; six suites passed14:35:50 UTC;10 identical CSVs;44 bounded regions and38 source hashes checked. Eight DX11 scenes inspected at1280×720/640×360; no missing-art/render errors; warmed frame means4.778–5.868ms. Legacy capture alone logged two unrelated DataflowNodes date-initializer engine errors, recorded in art evidence; no GPU/full-match/device acceptance claim |
+| 2026-10-29 (Sprint10 and rink review, scoped) | Independently reviewed friend's Sprint10; Exhibition10/100, next11. Audited38 rink PNGs/14 regions; corrected source dimensions and manifest/runtime assumptions. Listed90 remaining original tickets and12 proposed art hours at0/12. Identified dynamic roster follow-ups; no gameplay/image changes or full-project rescan | Incremental build succeeded; all six suites passed14:09:27 UTC;10/10 saved pre-change traces identical. All38 PNGs decoded, alpha presence audited,14 rects in bounds, duplicate JSON hashes identical; populated overview/atlas visually inspected. No live rendered/device acceptance |
+| 2026-10-29 (Sprint 09, scoped update) | Added validated actor-ID shooting/passing/checking and per-actor teammate search; preserved center/AI routing. Exhibition 9/100, next 10; customization/economy 2/60, next CE-03. No full-project rescan | Development Editor build succeeded (13 actions, UBT 61.37 s); all six suites passed 08:00:41 UTC. All six skater roles/period directions, invalid/ineligible IDs, no-mutation rejection, ownership/queue edges and AI credit tested; 10/10 pre/post CSV hashes identical; no new render/device test |
+| 2026-10-29 (Sprint 08, scoped update) | Reconciled pasted choices and three direct user clarifications; superseded local-model tables; mapped approved/pending policies to future tickets; revised fatigue/lines/goalie/OT dependency scope. Exhibition 8/100, next 09; customization/economy 2/60, next CE-03. No gameplay change or full-project rescan | Fresh Development Editor incremental build succeeded (zero compile actions, UBT 3.90 s); all six suites passed 07:46:03–07:46:04 UTC, including both-side/entry career-file isolation and Story regression. Decision provenance, links and whitespace checked; no new render/device/benchmark |
+| 2026-10-29 (Sprint 07, scoped update) | Added offline seeded scenario helper, fixed 120 Hz command scripts, compact state/ownership/action CSV capture and ten both-side exports; added sixth suite and updated verifier. Exhibition 7/100, next 08; customization/economy 2/60, next CE-03. No live gameplay change or full-project rescan | Final Editor build and all six suites passed at 03:27:59 UTC; repeated CSV equality, changed-seed geometry, pass/shot/goal/reset/finish events, invalid script rejection and export roundtrip verified. Independently parsed ten 30-column traces; sample traces tracked; no rendered/device test |
+| 2026-10-29 (Sprint 06, scoped update) | Added shared standalone/title Home/Away setup, Start/Back with restored focus, chosen-center movement/actions/marker/camera and side-aware guidance/results; retained Story Home control and side choice on restart/rematch. Exhibition 6/100, next 07; customization/economy 2/60, next CE-03. No full-project rescan | Final Editor build and all five suites passed at 03:13:54 UTC; both entry paths/sides, goals in periods 1–2, actions, camera, navigation and persistent isolation matrix verified. Five DX11 1280×720 views inspected; setup recaptured after neutral-background fix; zero runtime errors, 21 existing widget warnings per log |
+| 2026-10-29 (Sprint 05, scoped update) | Aligned Exhibition Mode labels in HUD/pause/help/restart/results; added canonical launcher with compatible old launcher/argument; updated active launch/save guidance. Exhibition 5/100, next 06; customization/economy 2/60, next CE-03. No full-project rescan | Editor build and all five suites passed at 03:01:25–03:01:26 UTC; launcher parser/routing checks passed; four sequential DX11 1280×720 HUD/pause/help/results captures inspected, zero errors and 21 existing widget warnings per runtime log |
+| 2026-10-29 (Sprint 04, scoped update) | Separated Exhibition period/results consumers and career save guard; preserved in-memory careers on restart/rematch; removed XP/level display; corrected results Back/Escape. Exhibition 4/100, next 05; customization/economy 2/60, next CE-03. No full-project rescan | Development Editor build and all five suites passed at 02:54:34 UTC. Both entry paths, three outcomes, legacy/all slot/backup bytes and timestamps, no-save creation, restart/rematch/quit and Story rewards covered. Rendered 1280×720 HUD inspected; zero runtime errors, 21 existing editor widget warnings |
+| 2026-10-29 (Sprint 03, scoped update) | Added owned validated Exhibition match configuration, fixed equal default ratings and both entry-path adapters; preserved Story ratings. Exhibition 3/100, next 04; customization/economy still 2/60, next CE-03. No full-project rescan | Fresh Development Editor build succeeded after correcting a test-only compile issue; all five suites passed at 02:33:16–02:33:17 UTC, including new configuration/isolation/Story checks; no rendered/device playtest |
+| 2026-10-29 (Sprint 02, scoped update) | Completed requested Exhibition reference/drill ticket; count now 2/100, next Exhibition 03; customization/economy remains 2/60, next CE-03. Added timestamped observations, explicit evidence gaps and exact existing skate/pass/shot fixture recipes. No gameplay/art changes or full-project rescan | Fresh Development Editor incremental build succeeded; all five suites passed at 02:26:29 UTC; video inspected in Chrome; scoped documentation checks |
+| 2026-10-29 | Initial repository-wide baseline; preserved 2/60 and 1/100 counters; separately recorded slots/UI kit; confirmed 34/44 new hockey sources; documented missing features, user deliveries and contradictions | Source/doc inventory, fresh manifest existence check and inspection of prior four-suite passing log; no new gameplay execution |
+| 2026-10-29 (rescan 2) | Added implemented Customize Controls, keyboard/gamepad remapping/settings, dynamic prompts, controller name entry and disconnect pause; added requested console targets and outstanding hardware/platform work. Counts remain 2/60, 1/100 and 34/44 hockey sources; next CE ticket remains CE-03 | Inventoried 1,416 files; inspected controls source, current design/UI records, sprint status, fresh manifest paths and prior five-suite passing log at 00:38 UTC; no new gameplay/device tests |
+| 2026-10-29 (rescan 3) | Confirmed complete hockey source delivery across the project report: 44/44 available, zero missing; corrected stale verification inventory. Runtime art integration/visual acceptance remain open. No further completed sprint recorded: 2/60 customization/economy and 1/100 Exhibition; next CE-03 | Inventoried 1,426 files; checked all registered source paths and PNG header dimensions, live atlas filename references, current source/schema and sprint records; same prior five-suite passing log at 00:38 UTC. No fresh image decoding, engine build, gameplay or hardware tests |
+| 2026-10-29 (rescan 4) | Reconciled the entire report with completed Exhibition Sprints 01–07: independent configuration, reward/save isolation, naming/launcher, Home/Away setup and seeded scenario traces. Updated detailed hockey count/checklist and six-suite evidence; customization/economy remains 2/60, art 44/44, next CE-03 / Exhibition 08 | Inventoried 1,449 files; inspected current source, sprint records, manifests, verifier and prior six-suite passing log at 03:27:59 UTC; no fresh build, gameplay or device tests |
+| 2026-10-29 (rescan 5) | Reconciled project-wide status with Exhibition 10/100 and separate rink-art integration 12/12; next Exhibition 11. Customization/economy stays 2/60, next CE-03; character/action source delivery remains 44/44. Recorded actor APIs, selected-skater/switch simulation and modular rink delivery while retaining integration/human acceptance gaps | Inventoried 1,520 files at commit 9e4a7d2; clean working tree before report edit. Inspected source, manifests, sprint/art records and prior six-suite passing log at 14:35:50 UTC; no new runtime/device testing |
+| 2026-10-29 (rescan 6) | Read and linked story/lore, character customization, store-item and overworld-assets chats. Preserved supplied world/cast/sponsor requirements and unresolved capital/story decisions; store catalogue still empty. Reconciled Exhibition 13/100, next 14, selected HUD/camera/Switch and saved-controls migration; CE 2/60, rink art 12/12, source sheets 44/44 | Inventoried 1,527 files; inspected current uncommitted source/docs, source manifests and prior six-suite passing log at 16:12:32–33 UTC. No fresh gameplay/device testing |
+| 2026-10-29 (audio/SFX inventory) | Created linked audio/SFX asset backlog with UI/hockey/overworld/RPG cues, music/ambience, later-feature needs, delivery/licensing and integration/mix/device acceptance. Added audio to project checklist; counters unchanged | Authored audio filename and gameplay source scan; no audio files/playback found. Documentation-only update; no assets generated or runtime tests run |
+| 2026-10-29 (UI tasklist linkage) | Read Plan Hockey Heroes UI screens and added fifth chat reference plus reconciled UI/polish table: kit assets, save slots and controls complete; branding, final screen integration, partial HUD, audio, copy, economy, devices/accessibility, ports and release work tracked separately. Gameplay counters unchanged | Read complete referenced chat and local UI inventory; local links/format checked. Documentation-only update; no new gameplay tests |
+| 2026-10-29 (percentage statistics) | Added per-list percentages using existing sprint/asset counts and explicitly enumerated equal-weight checkpoints for other subjects. Separated planning/source delivery from runtime acceptance; no overall average or new implementation credit | Recomputed ratios and checked report links/format. Documentation-only; no fresh gameplay tests |
+| 2026-10-29 (updated customization chat check) | Re-read latest completed customization turn and cross-checked detailed art request/audit, CE backlog and Unreal profile/creation source. Added production-delivery table and checkpoints. CE stays 2/60 (3.3%), modular creator runtime 0%; next CE-03, first art dependency CE-13. Other percentages unchanged | Documentation/source check and local-link/format validation only; no new art, gameplay build or runtime tests |
+
+### October 29, 2026 — scoped hockey-art update
+
+All ten formerly missing hockey sheets have been delivered; source availability is now 44/44. Updated the existing art handoff and this report's hockey inventory. Checked all registered paths and decoded all 44 PNGs at 1024×1024. Animation coverage review, asset preparation, Unreal integration and visual acceptance remain open. No full-project rescan or gameplay tests were performed.
+On the next scan append one dated row summarizing actual changes, regression evidence, newly supplied assets and remaining blockers, then refresh the sections above.
+
